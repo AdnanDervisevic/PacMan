@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace PacManLib
 {
@@ -16,52 +17,53 @@ namespace PacManLib
     /// </summary>
     public class PacMan
     {
-        private SpriteBatch spriteBatch = null;
-        private ContentManager contentManager = null;
+        private GameMap gameMap = null;
 
         /// <summary>
-        /// The sprite batch.
+        /// Gets the engine manager.
         /// </summary>
-        public SpriteBatch SpriteBatch
-        {
-            get { return this.spriteBatch; }
-            set
-            {
-                if (this.spriteBatch == null)
-                    this.spriteBatch = value;
-            }
-        }
-
-        /// <summary>
-        /// The content manager.
-        /// </summary>
-        public ContentManager Content
-        {
-            get { return this.contentManager; }
-            set
-            {
-                if (this.contentManager == null)
-                    this.contentManager = value;
-            }
-        }
+        public EngineManager EngineManager { get; private set; }
 
         /// <summary>
         /// Constructor
         /// </summary>
         public PacMan(ContentManager content)
         {
-            // TODO: Construct any child components here
-            this.Content = content;
+            // Constructs the engine manager.
+            this.EngineManager = new EngineManager(content);
         }
 
         /// <summary>
         /// Allows the game component to perform any initialization it needs to before starting
         /// to run.  This is where it can query for any required services and load content.
         /// </summary>
-        public void Initialize()
+        public void Initialize(SpriteBatch spriteBatch, int screenWidth, int screenHeight)
         {
-            // TODO: Add your initialization code here
+            // Initializes the spritebatch and screen width and height.
+            this.EngineManager.SpriteBatch = spriteBatch;
+            this.EngineManager.ScreenWidth = screenWidth;
+            this.EngineManager.ScreenHeight = screenHeight;
+
+            this.gameMap = new GameMap(this.EngineManager, new int[,]
+            {
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            });
+
+            this.gameMap.Initialize();
         }
+
+        #region Update & Draw
 
         /// <summary>
         /// Allows the game component to update itself.
@@ -70,6 +72,21 @@ namespace PacManLib
         public void Update(GameTimerEventArgs gameTime)
         {
             // TODO: Add your update code here
+
+            // Adds gesture capabilities to the game.
+            TouchPanel.EnabledGestures = GestureType.Tap | GestureType.Hold;
+            if (TouchPanel.IsGestureAvailable)
+            {
+                GestureSample sample = TouchPanel.ReadGesture();
+
+                switch (sample.GestureType)
+                {
+                    // If we detected a Tap then fire the OnTap method.
+                    case GestureType.Tap:
+                        OnTap(sample);
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -78,7 +95,23 @@ namespace PacManLib
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Draw(GameTimerEventArgs gameTime)
         {
-            spriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
+            // Clears the backbuffer.
+            this.EngineManager.SpriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.gameMap.Draw(gameTime);
         }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Method that runs every time you tap on the screen.
+        /// </summary>
+        /// <param name="sample">The Gesture sample.</param>
+        private void OnTap(GestureSample sample)
+        {
+        }
+
+        #endregion
     }
 }
