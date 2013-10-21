@@ -17,8 +17,8 @@ namespace PacMan
 {
     public partial class GamePage : PhoneApplicationPage
     {
-        PacManLib.PacMan pacMan;
-        GameTimer timer;
+        private PacManLib.PacMan pacMan;
+        private GameTimer timer;
 
         public GamePage()
         {
@@ -39,12 +39,9 @@ namespace PacMan
             // Set the sharing mode of the graphics device to turn on XNA rendering
             SharedGraphicsDeviceManager.Current.GraphicsDevice.SetSharingMode(true);
 
-            // TODO: use this.content to load your game content here
-            // Create a new SpriteBatch, which can be used to draw textures.
-            pacMan.SpriteBatch = new SpriteBatch(SharedGraphicsDeviceManager.Current.GraphicsDevice);
-
-            // TODO: use this.content to load your game content here
-            pacMan.Initialize();
+            // Initializes the game.
+            pacMan.Initialize(new SpriteBatch(SharedGraphicsDeviceManager.Current.GraphicsDevice), 
+                SharedGraphicsDeviceManager.Current.PreferredBackBufferWidth, SharedGraphicsDeviceManager.Current.PreferredBackBufferHeight);
 
             // Start the timer
             timer.Start();
@@ -69,7 +66,7 @@ namespace PacMan
         /// </summary>
         private void OnUpdate(object sender, GameTimerEventArgs e)
         {
-            // TODO: Add your update logic here
+            // This updates the entire game.
             pacMan.Update(e);
         }
 
@@ -78,8 +75,29 @@ namespace PacMan
         /// </summary>
         private void OnDraw(object sender, GameTimerEventArgs e)
         {
-            // TODO: Add your drawing code here
+            // This draws the entire game.
             pacMan.Draw(e);
+        }
+
+        /// <summary>
+        /// Event fired when the phone changes orientation, this is used to track whether we should adapt
+        /// the controls for landscape left or right.
+        /// </summary>
+        /// <param name="e">The Orientation changed event arguments.</param>
+        protected override void OnOrientationChanged(OrientationChangedEventArgs e)
+        {
+            if (e.Orientation == PageOrientation.LandscapeLeft)
+            {
+                if (this.pacMan != null && this.pacMan.EngineManager != null)
+                    this.pacMan.EngineManager.Orientation = DisplayOrientation.LandscapeLeft;
+            }
+            else if (e.Orientation == PageOrientation.LandscapeRight)
+            {
+                if (this.pacMan != null && this.pacMan.EngineManager != null)
+                    this.pacMan.EngineManager.Orientation = DisplayOrientation.LandscapeRight;
+            }
+
+            base.OnOrientationChanged(e);
         }
     }
 }

@@ -79,6 +79,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EngineManager.cs" />
+    <Compile Include="GameMap.cs" />
     <Compile Include="PacMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
