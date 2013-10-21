@@ -72,6 +72,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PathFinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppServiceProvider.cs" />
   </ItemGroup>
