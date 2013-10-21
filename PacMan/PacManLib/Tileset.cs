@@ -6,7 +6,7 @@ namespace PacManLib
 {
     public sealed class Tileset
     {
-        private List<Rectangle> sourceRectanglels = new List<Rectangle>();
+        private List<Rectangle> sourceRectangles = new List<Rectangle>();
         private Texture2D texture;
         private int tileWidth;
         private int tileHeight;
@@ -36,7 +36,7 @@ namespace PacManLib
 
             for (int y = 0; y < tilesInHeight; y++)
                 for (int x = 0; x < tilesInWidth; x++)
-                    this.sourceRectanglels.Add(new Rectangle(
+                    this.sourceRectangles.Add(new Rectangle(
                         x * tileWidth,
                         y * tileHeight,
                         tileWidth, tileHeight));
@@ -49,7 +49,7 @@ namespace PacManLib
         /// <returns>The source rectangle for the given index.</returns>
         public Rectangle GetSourceRectangle(int index)
         {
-            return this.sourceRectanglels[index];
+            return this.sourceRectangles[index];
         }
 
     }

@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Input.Touch;
+using PacManLib.Map;
+using Microsoft.Devices.Sensors;
 
 namespace PacManLib
 {
@@ -17,7 +19,10 @@ namespace PacManLib
     /// </summary>
     public class PacMan
     {
+        private Vector3 gyroReading;
+
         private GameMap gameMap = null;
+        private Player player = null;
 
         /// <summary>
         /// Gets the engine manager.
@@ -46,7 +51,22 @@ namespace PacManLib
 
             this.gameMap = new GameMap(this.EngineManager, new int[,]
             {
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            }, 40, 40);
+
+            /*
+             *  { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
@@ -57,10 +77,12 @@ namespace PacManLib
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-            }, 40, 40);
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },*/
 
             this.gameMap.Initialize();
+
+            this.player = new Player(this.EngineManager,
+                this.EngineManager.Content.Load<Texture2D>("pacmanComplete"), 80, 80);
         }
 
         #region Update & Draw
@@ -87,6 +109,8 @@ namespace PacManLib
                         break;
                 }
             }
+
+            this.player.Update(gameTime);
         }
 
         /// <summary>
@@ -98,6 +122,7 @@ namespace PacManLib
             // Clears the backbuffer.
             this.EngineManager.SpriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
             this.gameMap.Draw(gameTime);
+            this.player.Draw(gameTime);
         }
 
         #endregion
@@ -110,6 +135,11 @@ namespace PacManLib
         /// <param name="sample">The Gesture sample.</param>
         private void OnTap(GestureSample sample)
         {
+            this.player.rotation++;
+
+            if (this.player.rotation > 360)
+                this.player.rotation = 0;
+            
         }
 
         #endregion

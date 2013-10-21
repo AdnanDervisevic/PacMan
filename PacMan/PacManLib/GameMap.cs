@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PacManLib
+namespace PacManLib.Map
 {
     public sealed class GameMap
     {
         private Tileset tileset = null;
         private int tileWidth;
         private int tileHeight;
-        private int[,] map = null;
+        private Tile[,] map = null;
         private EngineManager engineManager = null;
 
         /// <summary>
@@ -22,7 +22,12 @@ namespace PacManLib
         public GameMap(EngineManager engineManager, int[,] map, int tileWidth, int tileHeight)
         {
             this.engineManager = engineManager;
-            this.map = map;
+
+            this.map = new Tile[map.GetLength(0), map.GetLength(1)];
+            for (int x = 0; x < map.GetLength(0); x++)
+                for (int y = 0; y < map.GetLength(1); y++)
+                    this.map[x, y] = new Tile() { ContentCode = (TileContent)map[x, y] };
+
             this.tileWidth = tileWidth;
             this.tileHeight = tileHeight;
         }
@@ -63,7 +68,7 @@ namespace PacManLib
                 {
                     this.engineManager.SpriteBatch.Draw(
                         this.tileset.Texture, new Vector2(x * this.tileWidth, y * this.tileHeight),
-                        this.tileset.GetSourceRectangle(this.map[y, x]), Color.White);
+                        this.tileset.GetSourceRectangle((int)this.map[y, x].ContentCode), Color.White);
                 }
             }
 
@@ -71,5 +76,15 @@ namespace PacManLib
         }
 
         #endregion
+
+        /// <summary>
+        /// Updates the tileContent for a specific tile.
+        /// </summary>
+        /// <param name="point">The tile position.</param>
+        /// <param name="tileContent">The new tile content.</param>
+        public void UpdateTile(Point point, TileContent tileContent)
+        {
+            this.map[point.Y, point.X].ContentCode = tileContent;
+        }
     }
 }

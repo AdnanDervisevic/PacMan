@@ -10,6 +10,15 @@
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\tileset.xnb</Output>
       <Time>2013-10-21T14:44:45.9551125+02:00</Time>
     </Item>
+    <Item>
+      <Source>pacmanComplete.png</Source>
+      <Name>pacmanComplete</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\pacmanComplete.xnb</Output>
+      <Time>2013-10-21T15:51:59.7694119+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{4C186B8E-6D37-46FD-9329-0020CD92C0C8}</ContentProjectGUID>
