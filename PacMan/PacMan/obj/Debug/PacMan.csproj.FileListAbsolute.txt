@@ -1,4 +1,3 @@
-D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\testtile.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\ApplicationIcon.png
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Background.png
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\PacMan.dll
@@ -15,3 +14,4 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\PacMan.g.resource
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\PacMan.dll
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\PacMan.pdb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\XapCacheFile.xml
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\tileset.xnb

@@ -1,6 +1,7 @@
-D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\testtile.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\PacManLib.dll
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\PacManLib.pdb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.dll
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.pdb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.csprojResolveAssemblyReference.cache
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\tileset.xnb

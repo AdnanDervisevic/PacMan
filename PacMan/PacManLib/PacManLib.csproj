@@ -83,6 +83,7 @@
     <Compile Include="GameMap.cs" />
     <Compile Include="PacMan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tileset.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PacManLibContent\PacManLibContent.contentproj">

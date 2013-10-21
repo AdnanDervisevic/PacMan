@@ -9,9 +9,9 @@ namespace PacManLib
 {
     public sealed class GameMap
     {
+        private Tileset tileset = null;
         private int tileWidth;
         private int tileHeight;
-        private Texture2D tex;
         private int[,] map = null;
         private EngineManager engineManager = null;
 
@@ -34,7 +34,7 @@ namespace PacManLib
         public void Initialize()
         {
             // TODO: Add your initialization code here
-            this.tex = this.engineManager.Content.Load<Texture2D>("testtile");
+            this.tileset = new Tileset(this.engineManager.Content.Load<Texture2D>("tileset"), 40, 40);
         }
 
         #region Update & Draw
@@ -61,7 +61,9 @@ namespace PacManLib
             {
                 for (int x = 0; x < this.map.GetLength(1); x++)
                 {
-                    this.engineManager.SpriteBatch.Draw(this.tex, new Vector2(x * this.tileWidth, y * this.tileHeight), Color.White);
+                    this.engineManager.SpriteBatch.Draw(
+                        this.tileset.Texture, new Vector2(x * this.tileWidth, y * this.tileHeight),
+                        this.tileset.GetSourceRectangle(this.map[y, x]), Color.White);
                 }
             }
 
