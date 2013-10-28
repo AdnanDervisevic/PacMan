@@ -12,12 +12,13 @@ using Microsoft.Phone.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using PacManLib;
 
 namespace PacMan
 {
     public partial class GamePage : PhoneApplicationPage
     {
-        private PacManLib.PacMan pacMan;
+        private PacManSX pacMan;
         private GameTimer timer;
 
         public GamePage()
@@ -25,8 +26,7 @@ namespace PacMan
             InitializeComponent();
 
             // Initializes the game and passes the content manager from the application.
-            pacMan = new PacManLib.PacMan((Application.Current as App).Content);
-
+            
             // Create a timer for this page
             timer = new GameTimer();
             timer.UpdateInterval = TimeSpan.FromTicks(333333);
@@ -40,8 +40,11 @@ namespace PacMan
             SharedGraphicsDeviceManager.Current.GraphicsDevice.SetSharingMode(true);
 
             // Initializes the game.
-            pacMan.Initialize(new SpriteBatch(SharedGraphicsDeviceManager.Current.GraphicsDevice), 
-                SharedGraphicsDeviceManager.Current.PreferredBackBufferWidth, SharedGraphicsDeviceManager.Current.PreferredBackBufferHeight);
+            this.pacMan = new PacManSX(new GameManager(
+                SharedGraphicsDeviceManager.Current.PreferredBackBufferWidth,
+                SharedGraphicsDeviceManager.Current.PreferredBackBufferHeight,
+                new SpriteBatch(SharedGraphicsDeviceManager.Current.GraphicsDevice), (Application.Current as App).Content));
+
 
             // Start the timer
             timer.Start();
@@ -67,7 +70,7 @@ namespace PacMan
         private void OnUpdate(object sender, GameTimerEventArgs e)
         {
             // This updates the entire game.
-            pacMan.Update(e);
+            this.pacMan.Update(e.ElapsedTime);
         }
 
         /// <summary>
@@ -76,7 +79,7 @@ namespace PacMan
         private void OnDraw(object sender, GameTimerEventArgs e)
         {
             // This draws the entire game.
-            pacMan.Draw(e);
+            this.pacMan.Draw(e.ElapsedTime);
         }
 
         /// <summary>
@@ -88,13 +91,13 @@ namespace PacMan
         {
             if (e.Orientation == PageOrientation.LandscapeLeft)
             {
-                if (this.pacMan != null && this.pacMan.EngineManager != null)
-                    this.pacMan.EngineManager.Orientation = DisplayOrientation.LandscapeLeft;
+                if (this.pacMan != null && this.pacMan.GameManager != null)
+                    this.pacMan.GameManager.Orientation = DisplayOrientation.LandscapeLeft;
             }
             else if (e.Orientation == PageOrientation.LandscapeRight)
             {
-                if (this.pacMan != null && this.pacMan.EngineManager != null)
-                    this.pacMan.EngineManager.Orientation = DisplayOrientation.LandscapeRight;
+                if (this.pacMan != null && this.pacMan.GameManager != null)
+                    this.pacMan.GameManager.Orientation = DisplayOrientation.LandscapeRight;
             }
 
             base.OnOrientationChanged(e);
