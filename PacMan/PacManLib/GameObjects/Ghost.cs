@@ -77,7 +77,7 @@ namespace PacManLib.GameObjects
             // Check if the tile is a turn or path tile.
             if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.Path
                 || ghostTile.TileContent >= TileContent.Ring && ghostTile.TileContent <= TileContent.DotTurn
-                || ghostTile.TileContent == TileContent.FruitSpawn)
+                || ghostTile.TileContent == TileContent.FruitSpawn || ghostTile.TileContent == TileContent.Door)
             {
                 // Convert the cell to a position.
 
@@ -92,7 +92,7 @@ namespace PacManLib.GameObjects
                         direction = this.GhostAI(this, ghostTile, ghostCoords, playerCoords, out motion);
                     }
 
-                    if (PacManSX.CanCharacterMove(tileMap, ghostCoords, direction, out motion, out targetTile))
+                    if (PacManSX.CanGhostMove(tileMap, ghostCoords, direction, out motion, out targetTile))
                     {
                         this.Motion = motion;
                         this.Direction = direction;
@@ -100,7 +100,7 @@ namespace PacManLib.GameObjects
                     else
                     {
                         // If the ghost can't move in that direction then check if the player can move in the old direction.
-                        if (PacManSX.CanCharacterMove(tileMap, ghostCoords, this.Direction, out motion, out targetTile))
+                        if (PacManSX.CanGhostMove(tileMap, ghostCoords, this.Direction, out motion, out targetTile))
                         {
                             this.Motion = motion;
                         }
