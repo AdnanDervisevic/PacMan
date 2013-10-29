@@ -85,6 +85,7 @@
     <Compile Include="GameObjects\Character.cs" />
     <Compile Include="GameObjects\Ghost.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="Map\SpawnPoint.cs" />
     <Compile Include="Map\Tile.cs" />
     <Compile Include="Map\TileContent.cs" />
     <Compile Include="Map\TileMap.cs" />

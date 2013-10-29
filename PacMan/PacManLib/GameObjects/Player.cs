@@ -43,7 +43,7 @@ namespace PacManLib.GameObjects
         public Player(GameManager gameManager, Vector2 position, Texture2D texture, int frameWidth, int frameHeight)
             : base(gameManager, position, texture, frameWidth, frameHeight)
         {
-            this.Speed = 140;
+            this.Speed = 100;
         }
 
         #endregion

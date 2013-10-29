@@ -46,7 +46,7 @@ namespace PacManLib.GameObjects
         public Ghost(GameManager gameManager, Vector2 position, Texture2D texture, int frameWidth, int frameHeight)
             : base(gameManager, position, texture, frameWidth, frameHeight)
         {
-            this.Speed = 140;
+            this.Speed = 120;
         }
 
         #endregion
@@ -77,7 +77,7 @@ namespace PacManLib.GameObjects
             // Check if the tile is a turn or path tile.
             if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.Path
                 || ghostTile.TileContent >= TileContent.Ring && ghostTile.TileContent <= TileContent.DotTurn
-                || ghostTile.TileContent == TileContent.FruitSpawn || ghostTile.TileContent == TileContent.Door)
+                || ghostTile.TileContent == TileContent.Door)
             {
                 // Convert the cell to a position.
 

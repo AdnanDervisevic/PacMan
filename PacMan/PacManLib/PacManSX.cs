@@ -144,59 +144,57 @@ namespace PacManLib
             this.fruitTileset = new Tileset(this.GameManager.ContentManager.Load<Texture2D>("Fruits"),
                 PacManSX.TileWidth, PacManSX.TileHeight);
 
-            this.tileMap = new TileMap(gameManager, 1, new int[,]
-                {
-                    { 5, 1, 8, 0, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6 },
-                    { 2, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 2 },
-                    { 2, 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 0, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 8, 17, 7, 1, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 10, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 16, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 10 },
-                    { 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 5, 1, 1, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0 },
-                    { 9, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 9 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 1, 1, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 16, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 0, 2 },
-                    { 2, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 2 },
-                    { 3, 1, 8, 0, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 }
-                });
+            // Create the tile map and load the first map.
+            this.tileMap = new TileMap(gameManager);
+            this.LoadMap(1);
 
-            this.dotsAndRingsLeft = this.tileMap.DotsAndRings();
+            // Load all the spawns and initialize all the players if they exists.
+            int i = 0;
+            Point[] spawnCoords = this.tileMap.GetSpawns(SpawnPoint.Player, SpawnPoint.BlueGhost, SpawnPoint.GreenGhost, SpawnPoint.YellowGhost, SpawnPoint.PurpleGhost);
 
-            this.player = new Player(this.GameManager, new Vector2(60, 40),
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.player = new Player(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
                 this.GameManager.ContentManager.Load<Texture2D>("Pacman"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+            }
+            i++;
 
-            this.blueGhost = new Ghost(this.GameManager, new Vector2(560, 40),
-                this.GameManager.ContentManager.Load<Texture2D>("BlueGhost"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
-            this.blueGhost.GhostAI += blueGhostAI;
-            this.blueGhost.Alive = false;
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.blueGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                    this.GameManager.ContentManager.Load<Texture2D>("BlueGhost"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                this.blueGhost.GhostAI += blueGhostAI;
+                this.blueGhost.Alive = false;
+            }
+            i++;
 
-            this.greenGhost = new Ghost(this.GameManager, new Vector2(560, 40),
-                this.GameManager.ContentManager.Load<Texture2D>("BlueGhost"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
-            this.greenGhost.GhostAI += greenGhostAI;
-            this.greenGhost.Alive = false;
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.greenGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                    this.GameManager.ContentManager.Load<Texture2D>("BlueGhost"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                this.greenGhost.GhostAI += greenGhostAI;
+                this.greenGhost.Alive = false;
+            }
+            i++;
 
-            this.yellowGhost = new Ghost(this.GameManager, new Vector2(560, 40),
-                this.GameManager.ContentManager.Load<Texture2D>("BlueGhost"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
-            this.yellowGhost.GhostAI += yellowGhostAI;
-            this.yellowGhost.Alive = false;
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.yellowGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                    this.GameManager.ContentManager.Load<Texture2D>("BlueGhost"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                this.yellowGhost.GhostAI += yellowGhostAI;
+                this.yellowGhost.Alive = false;
+            }
+            i++;
 
-            this.purpleGhost = new Ghost(this.GameManager, new Vector2(560, 40),
-                this.GameManager.ContentManager.Load<Texture2D>("BlueGhost"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
-            this.purpleGhost.GhostAI += purpleGhostAI;
-            this.purpleGhost.Alive = false;
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.purpleGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                    this.GameManager.ContentManager.Load<Texture2D>("BlueGhost"), PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                this.purpleGhost.GhostAI += purpleGhostAI;
+            }
 
 #if WINDOWS_PHONE
+            // Initialize Windows phone stuff.
             TouchPanel.EnabledGestures = GestureType.Tap;
             this.accelerometer = new Accelerometer();
             this.accelerometer.CurrentValueChanged += accelerometer_CurrentValueChanged;
@@ -220,7 +218,7 @@ namespace PacManLib
                 if (this.dotsAndRingsLeft == 0)
                 {
                     // Then load the new map and reset all the positions.
-                    LoadMap();
+                    LoadMap(this.tileMap.Level + 1);
                     ResetPositions();
                 }
 
@@ -243,8 +241,8 @@ namespace PacManLib
                     if (this.fruitSpawnTimer >= this.fruitSpawnTime)
                     {
                         // Spawn the fruit.
-                        Point fruitSpawnCoords = this.tileMap.GetFruitSpawn();
-                        if (fruitSpawnCoords.X > 0 && fruitSpawnCoords.Y > 0)
+                        Point fruitSpawnCoords = this.tileMap.GetSpawn(SpawnPoint.Fruit);
+                        if (fruitSpawnCoords.X >= 0 && fruitSpawnCoords.Y >= 0)
                         {
                             Vector2 fruitPos = PacManSX.ConvertCellToPosition(fruitSpawnCoords);
                             this.fruitBounds = new Rectangle(
@@ -288,21 +286,37 @@ namespace PacManLib
                 }
 
                 // Updates the player and movement.
-                this.player.Update(elapsedGameTime);
-                this.blueGhost.Update(elapsedGameTime);
-                this.greenGhost.Update(elapsedGameTime);
-                this.yellowGhost.Update(elapsedGameTime);
-                this.purpleGhost.Update(elapsedGameTime);
+                if (this.player != null)
+                    this.player.Update(elapsedGameTime);
+
+                if (this.blueGhost != null)
+                    this.blueGhost.Update(elapsedGameTime);
+
+                if (this.greenGhost != null)
+                    this.greenGhost.Update(elapsedGameTime);
+
+                if (this.yellowGhost != null)
+                    this.yellowGhost.Update(elapsedGameTime);
+
+                if (this.purpleGhost != null)
+                    this.purpleGhost.Update(elapsedGameTime);
 
                 // If the player is alive then handle the movement.
-                if (this.player.Alive)
+                if (this.player != null && this.player.Alive)
                     PlayerMovement(elapsedGameTime);
 
                 // Update the movement for all ghosts.
-                this.blueGhost.Movement(elapsedGameTime, player, tileMap);
-                this.greenGhost.Movement(elapsedGameTime, player, tileMap);
-                this.yellowGhost.Movement(elapsedGameTime, player, tileMap);
-                this.purpleGhost.Movement(elapsedGameTime, player, tileMap);
+                if (this.blueGhost != null)
+                    this.blueGhost.Movement(elapsedGameTime, player, tileMap);
+
+                if (this.greenGhost != null)
+                    this.greenGhost.Movement(elapsedGameTime, player, tileMap);
+
+                if (this.yellowGhost != null)
+                    this.yellowGhost.Movement(elapsedGameTime, player, tileMap);
+
+                if (this.purpleGhost != null)
+                    this.purpleGhost.Movement(elapsedGameTime, player, tileMap);
 
                 // Check for Player Ghost hitbox.
                 PlayerGhostHitbox();
@@ -313,8 +327,8 @@ namespace PacManLib
                     // Normalize the bullet motion and move the bullet.
                     this.bulletMotion.Normalize();
 
-                    this.bulletPosition.X += (float)Math.Round((this.bulletMotion * this.player.Speed * 1f * (float)elapsedGameTime.TotalSeconds).X);
-                    this.bulletPosition.Y += (float)Math.Round((this.bulletMotion * this.player.Speed * 1f * (float)elapsedGameTime.TotalSeconds).Y);
+                    this.bulletPosition.X += (float)Math.Round((this.bulletMotion * this.player.Speed * 1.5f * (float)elapsedGameTime.TotalSeconds).X);
+                    this.bulletPosition.Y += (float)Math.Round((this.bulletMotion * this.player.Speed * 1.5f * (float)elapsedGameTime.TotalSeconds).Y);
 
                     // Calculate the bounds of the bullet and check if it intersects with a ghost.
                     Rectangle bulletBounds = new Rectangle((int)this.bulletPosition.X, (int)this.bulletPosition.Y, 20, 20);
@@ -346,7 +360,6 @@ namespace PacManLib
                 }
                 catch (Exception) { }
 #endif
-
                 this.startGameTimer += (float)elapsedGameTime.TotalSeconds;
 
                 if (this.startGameTimer >= 1)
@@ -396,13 +409,21 @@ namespace PacManLib
             this.GameManager.SpriteBatch.GraphicsDevice.Clear(new Color(68, 68, 68));
 
             this.tileMap.Draw(elapsedGameTime);
-            this.player.Draw(elapsedGameTime);
+            if (this.player != null)
+                this.player.Draw(elapsedGameTime);
 
             // Draws all the ghosts.
-            this.blueGhost.Draw(elapsedGameTime);
-            this.greenGhost.Draw(elapsedGameTime);
-            this.yellowGhost.Draw(elapsedGameTime);
-            this.purpleGhost.Draw(elapsedGameTime);
+            if (this.blueGhost != null)
+                this.blueGhost.Draw(elapsedGameTime);
+
+            if (this.greenGhost != null)
+                this.greenGhost.Draw(elapsedGameTime);
+
+            if (this.yellowGhost != null)
+                this.yellowGhost.Draw(elapsedGameTime);
+
+            if (this.purpleGhost != null)
+                this.purpleGhost.Draw(elapsedGameTime);
 
             this.GameManager.SpriteBatch.Begin();
 
@@ -462,11 +483,13 @@ namespace PacManLib
 #endif
 
         /// <summary>
-        /// Helper for loading the map.
+        /// Helper for loading a map.
         /// </summary>
-        private void LoadMap()
+        private void LoadMap(int level)
         {
-            this.tileMap.LoadMap(this.tileMap.Level + 1, new int[,]
+            if (level == 1)
+            {
+                this.tileMap.LoadMap(level, new int[,]
                 {
                     { 5, 1, 8, 0, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6 },
                     { 2, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 2 },
@@ -485,13 +508,18 @@ namespace PacManLib
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
+                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 0, 2 },
                     { 2, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 2 },
                     { 3, 1, 8, 0, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 }
                 });
+
+                this.tileMap.UpdateTile(new Point(14, 17), SpawnPoint.Fruit);
+                this.tileMap.UpdateTile(new Point(1, 1), SpawnPoint.Player);
+                this.tileMap.UpdateTile(new Point(21, 1), SpawnPoint.PurpleGhost);
+            }
 
             this.dotsAndRingsLeft = this.tileMap.DotsAndRings();
         }
@@ -501,32 +529,50 @@ namespace PacManLib
         /// </summary>
         private void ResetPositions()
         {
-            this.player.Position = new Vector2(60, 40);
-            this.player.Direction = Direction.Right;
-            this.player.Alive = true;
-            this.player.GodMode = false;
-
-            this.blueGhost.Position = new Vector2(560, 40);
-            this.blueGhost.Direction = Direction.Right;
-            //this.blueGhost.Alive = true;
-
-            this.greenGhost.Position = new Vector2(560, 40);
-            this.greenGhost.Direction = Direction.Right;
-            //this.greenGhost.Alive = true;
-
-            this.yellowGhost.Position = new Vector2(560, 40);
-            this.yellowGhost.Direction = Direction.Right;
-            //this.yellowGhost.Alive = true;
-
-            this.purpleGhost.Position = new Vector2(560, 40);
-            this.purpleGhost.Direction = Direction.Right;
-            this.purpleGhost.Alive = true;
-
             // If it's game over, reload the map.
             if (this.gameOver)
+                this.LoadMap(1);
+
+            int i = 0;
+            Point[] spawnCoords = this.tileMap.GetSpawns(SpawnPoint.Player, SpawnPoint.BlueGhost, SpawnPoint.GreenGhost, SpawnPoint.YellowGhost, SpawnPoint.PurpleGhost);
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.tileMap.Level = 0;
-                this.LoadMap();
+                this.player.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
+                this.player.Direction = Direction.Right;
+                this.player.Alive = true;
+                this.player.GodMode = false;
+            }
+            i++;
+
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.blueGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
+                this.blueGhost.Direction = Direction.Right;
+                this.blueGhost.Alive = true;
+            }
+            i++;
+
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.greenGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
+                this.greenGhost.Direction = Direction.Right;
+                this.greenGhost.Alive = true;
+            }
+            i++;
+
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.yellowGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
+                this.yellowGhost.Direction = Direction.Right;
+                this.yellowGhost.Alive = true;
+            }
+            i++;
+
+            if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
+            {
+                this.purpleGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
+                this.purpleGhost.Direction = Direction.Right;
+                this.purpleGhost.Alive = true;
             }
 
             this.fruitSpawned = false;
@@ -992,8 +1038,7 @@ namespace PacManLib
             
             // Check if the tile is a turn or path tile.
             if (playerTile.TileContent == TileContent.Turn || playerTile.TileContent == TileContent.Path
-                || playerTile.TileContent >= TileContent.Ring && playerTile.TileContent <= TileContent.DotTurn
-                || playerTile.TileContent == TileContent.FruitSpawn)
+                || playerTile.TileContent >= TileContent.Ring && playerTile.TileContent <= TileContent.DotTurn)
             {
                 // Convert the cell to a position.
                 Vector2 playerTilePosition = PacManSX.ConvertCellToPosition(playerCoords);
@@ -1174,8 +1219,7 @@ namespace PacManLib
 
             // If the player can move then return true.
             if (targetTile.TileContent == TileContent.Path || targetTile.TileContent == TileContent.Turn
-                || targetTile.TileContent >= TileContent.Ring && targetTile.TileContent <= TileContent.DotTurn
-                || targetTile.TileContent == TileContent.FruitSpawn)
+                || targetTile.TileContent >= TileContent.Ring && targetTile.TileContent <= TileContent.DotTurn)
                 return true;
 
             // else set motion to (0, 0) and return false.
@@ -1208,22 +1252,22 @@ namespace PacManLib
 
                 // If he is in godmode then he should be able to eat the ghost.
                 // If the player and a ghost collides, kill the ghost and recieve score.
-                if (this.blueGhost.Alive && this.blueGhost.Bounds.Intersects(this.player.Bounds))
+                if (this.blueGhost != null && this.blueGhost.Alive && this.blueGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.blueGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
                 }
-                else if (this.greenGhost.Alive && this.greenGhost.Bounds.Intersects(this.player.Bounds))
+                else if (this.greenGhost != null && this.greenGhost.Alive && this.greenGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.greenGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
                 }
-                else if (this.yellowGhost.Alive && this.yellowGhost.Bounds.Intersects(this.player.Bounds))
+                else if (this.yellowGhost != null && this.yellowGhost.Alive && this.yellowGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.yellowGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
                 }
-                else if (this.purpleGhost.Alive && this.purpleGhost.Bounds.Intersects(this.player.Bounds))
+                else if (this.purpleGhost != null && this.purpleGhost.Alive && this.purpleGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.purpleGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
@@ -1232,10 +1276,10 @@ namespace PacManLib
             else
             {
                 // If the player and a ghost collides, remove a life from the player and kill it.
-                if (this.blueGhost.Alive && this.blueGhost.Bounds.Intersects(this.player.Bounds) ||
-                    this.greenGhost.Alive && this.greenGhost.Bounds.Intersects(this.player.Bounds) ||
-                    this.yellowGhost.Alive && this.yellowGhost.Bounds.Intersects(this.player.Bounds) ||
-                    this.purpleGhost.Alive && this.purpleGhost.Bounds.Intersects(this.player.Bounds))
+                if (this.blueGhost != null && this.blueGhost.Alive && this.blueGhost.Bounds.Intersects(this.player.Bounds) ||
+                    this.greenGhost != null && this.greenGhost.Alive && this.greenGhost.Bounds.Intersects(this.player.Bounds) ||
+                    this.yellowGhost != null && this.yellowGhost.Alive && this.yellowGhost.Bounds.Intersects(this.player.Bounds) ||
+                    this.purpleGhost != null && this.purpleGhost.Alive && this.purpleGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.lives--;
                     this.player.Alive = false;
@@ -1315,7 +1359,7 @@ namespace PacManLib
             // If the player can move then return true.
             if (targetTile.TileContent == TileContent.Path || targetTile.TileContent == TileContent.Turn
                 || targetTile.TileContent >= TileContent.Ring && targetTile.TileContent <= TileContent.DotTurn
-                || targetTile.TileContent == TileContent.FruitSpawn || targetTile.TileContent == TileContent.Door)
+                || targetTile.TileContent == TileContent.Door)
                 return true;
 
             // else set motion to (0, 0) and return false.

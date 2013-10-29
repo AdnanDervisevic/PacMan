@@ -17,12 +17,6 @@ namespace PacManLib.Map
     /// </summary>
     public sealed class Tile
     {
-        #region Consts
-        #endregion
-
-        #region Fields
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -30,21 +24,11 @@ namespace PacManLib.Map
         /// </summary>
         public TileContent TileContent { get; set; }
 
-        #endregion
+        /// <summary>
+        /// Gets or sets if the player or a ghost should spawn on this tile.
+        /// </summary>
+        public SpawnPoint SpawnPoint { get; set; }
 
-        #region Events
-        #endregion
-
-        #region Constructors
-        #endregion
-
-        #region Public Methods
-        #endregion
-
-        #region Private Helpers
-        #endregion
-
-        #region Nested Types
         #endregion
     }
 }
