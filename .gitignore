@@ -1,2 +1,14 @@
 _ReSharper
 _ReSharper.PacMan/
+PacMan/PacMan/obj/
+PacMan/PacMan/Bin/Debug/PacMan.pdb
+PacMan/PacManLib/bin/Windows Phone/Debug/PacManLib.dll
+PacMan/PacMan/Bin/
+PacMan/PacManLib/obj/Windows Phone/Debug/PacManLib.csprojResolveAssemblyReference.cache
+PacMan/PacMan/PacMan.csproj.user
+PacMan/PacManLib/bin/Windows Phone/Debug/PacManLib.pdb
+PacMan/PacManLib/obj/Windows Phone/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+PacMan/PacManLib/obj/Windows Phone/Debug/PacManLib.dll
+PacMan/PacManLib/obj/Windows Phone/Debug/PacManLib.pdb
+PacMan/PacManLibContent/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+PacMan/PacManLibContent/obj/Windows Phone/Debug/PacManLibContent.contentprojResolveAssemblyReference.cache

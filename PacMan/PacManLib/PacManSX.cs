@@ -109,8 +109,10 @@ namespace PacManLib
         private Texture2D BlackTexture;
         private Texture2D lifeTexture;
 
+        private SoundEffectInstance godmodeInstance;
+        private SoundEffectInstance chompInstance;
+        private SoundEffectInstance eatScoreInstance;
         private SoundEffect soundGodMode;
-        private SoundEffectInstance soundEngine;
         private SoundEffect soundChomp;
         private SoundEffect soundEatScore;
 
@@ -145,6 +147,14 @@ namespace PacManLib
             this.BlackTexture = this.GameManager.ContentManager.Load<Texture2D>("BlackTexture");
             this.fruitTileset = new Tileset(this.GameManager.ContentManager.Load<Texture2D>("Tiles/Fruits"),
                 PacManSX.TileWidth, PacManSX.TileHeight);
+
+            soundEatScore = gameManager.ContentManager.Load<SoundEffect>("Sounds\\coin");
+            soundChomp = gameManager.ContentManager.Load<SoundEffect>("Sounds\\chomp");
+            soundGodMode = gameManager.ContentManager.Load<SoundEffect>("Sounds\\god_mode");
+            
+            eatScoreInstance = soundEatScore.CreateInstance();
+            chompInstance = soundChomp.CreateInstance();
+            godmodeInstance = soundGodMode.CreateInstance();
 
             // Create the tile map and load the first map.
             this.tileMap = new TileMap(gameManager);
@@ -614,10 +624,16 @@ namespace PacManLib
             player.GodMode = true;
             this.godModeTimer = 0;
 
-            //Play godmode music
-            soundGodMode = GameManager.ContentManager.Load<SoundEffect>("Sounds/god_mode");
-            soundGodMode.Play();
-            soundEngine = soundGodMode.CreateInstance();
+            //Play godmode music if not active
+            if (godmodeInstance.State == SoundState.Stopped)
+            {
+                godmodeInstance.Volume = 0.75f;
+                godmodeInstance.IsLooped = true;
+                godmodeInstance.Play();
+            }
+
+            if (player.GodMode == false)
+                godmodeInstance.Stop();
         }
 
         /// <summary>
@@ -636,8 +652,7 @@ namespace PacManLib
             this.dotsAndRingsLeft--;
 
             // Sound for walking over a coin/ring
-            soundEatScore = GameManager.ContentManager.Load<SoundEffect>("Sounds/coin");
-            soundEatScore.Play();
+            eatScoreInstance.Play();
         }
 
         /// <summary>
@@ -649,28 +664,49 @@ namespace PacManLib
         /// <param name="playerCoords">The tile coordinates of the player.</param>
         /// <param name="motion">The motion the ghost should move in.</param>
         /// <returns>Returns the direction the ghost should move in.</returns>
+        /// Blue matches cyan AI
         private Direction blueGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion)
         {
             Direction direction = ghost.Direction;
             motion = ghost.Motion;
             Tile targetTile = null;
 
-            #region Ghost pathfinding for red behaviour
+            #region Cyan pathfinding tries to predict where the player will be in a few moments and thusly calculates what path it should take.
 
             if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
             {
-                int xDelta = Math.Abs((ghostCoords.X - playerCoords.X));
-                int yDelta = Math.Abs((ghostCoords.Y - playerCoords.Y));
+                Point predictedCoords;
+                predictedCoords.X = playerCoords.X;
+                predictedCoords.Y = playerCoords.Y;
 
+                // based on direction tries to estimate in front of the player by one tile to try and get slightly more accurate and predicting
+                if (player.Direction == Direction.Right)
+                    predictedCoords.X = playerCoords.X + 1;
+                else if (player.Direction == Direction.Left)
+                    predictedCoords.X = playerCoords.X - 1;
+                else if (player.Direction == Direction.Up)
+                    predictedCoords.Y = playerCoords.Y + 1;
+                else if (player.Direction == Direction.Down)
+                    predictedCoords.Y = playerCoords.Y - 1;
+
+                // calculates which path is closer purely based on distance between x and y of the player and ghost
+                int xDelta = Math.Abs((ghostCoords.X - predictedCoords.X));
+                int yDelta = Math.Abs((ghostCoords.Y - predictedCoords.Y));
+
+                // Checks where approximately the ghost is based on the x & y coordinates
                 if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                 {
+                    // If closer in the x coordinate space than the y space
                     if (xDelta > yDelta)
                     {
+                        // Move right!
                         direction = Direction.Right;
 
+                        // If the player can hunt you down and kill you, you should really try and go the other way
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
+                        // Various statements trying to auto-correct the ghosts movement in case he runs into a wall or a dead end
                         if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                         {
                             direction = Direction.Up;
@@ -688,7 +724,8 @@ namespace PacManLib
                             }
                         }
                     }
-
+                    
+                    // Same exact code, except for the other direction
                     else
                     {
                         direction = Direction.Up;
@@ -889,6 +926,7 @@ namespace PacManLib
         /// <param name="playerCoords">The tile coordinates of the player.</param>
         /// <param name="motion">The motion the ghost should move in.</param>
         /// <returns>Returns the direction the ghost should move in.</returns>
+        /// Green matches red ai
         private Direction greenGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion)
         {
             Direction direction = ghost.Direction;
@@ -1129,6 +1167,7 @@ namespace PacManLib
         /// <param name="playerCoords">The tile coordinates of the player.</param>
         /// <param name="motion">The motion the ghost should move in.</param>
         /// <returns>Returns the direction the ghost should move in.</returns>
+        /// Yellow matches orange AI. Orange always was a bit slow...
         private Direction yellowGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion)
         {
             Direction direction = ghost.Direction;
@@ -1139,8 +1178,25 @@ namespace PacManLib
 
             if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
             {
-                int xDelta = Math.Abs((ghostCoords.X - playerCoords.X));
-                int yDelta = Math.Abs((ghostCoords.Y - playerCoords.Y));
+                Point predictedCoords;
+                predictedCoords.X = playerCoords.X;
+                predictedCoords.Y = playerCoords.Y;
+
+                // based on direction tries to estimate in front of the player by one tile to try and get slightly more accurate and predicting
+                if (player.Direction == Direction.Right)
+                    predictedCoords.X = playerCoords.X + 1;
+                else if (player.Direction == Direction.Left)
+                    predictedCoords.X = playerCoords.X - 1;
+                else if (player.Direction == Direction.Up)
+                    predictedCoords.Y = playerCoords.Y + 1;
+                else if (player.Direction == Direction.Down)
+                    predictedCoords.Y = playerCoords.Y - 1;
+
+                int whichPathFinding = rand.Next(0, 1);
+
+                // calculates which path is closer purely based on distance between x and y of the player and ghost. Flips between them randomly
+                int xDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.X - predictedCoords.X)) : Math.Abs((ghostCoords.X - playerCoords.X));
+                int yDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.Y - predictedCoords.Y)) : Math.Abs((ghostCoords.Y - playerCoords.Y));
 
                 if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                 {
@@ -1357,6 +1413,12 @@ namespace PacManLib
 
             #endregion
 
+
+            int randomNumber = rand.Next(1, 5);
+
+            // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+            direction = (randomNumber % 5 == 0) ? direction : reverseMovement(direction);
+
             return direction;
         }
 
@@ -1369,18 +1431,36 @@ namespace PacManLib
         /// <param name="playerCoords">The tile coordinates of the player.</param>
         /// <param name="motion">The motion the ghost should move in.</param>
         /// <returns>Returns the direction the ghost should move in.</returns>
+        /// Purple ghost matches "pink" pac-man ai
         private Direction purpleGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion)
         {
             Direction direction = ghost.Direction;
             motion = ghost.Motion;
             Tile targetTile = null;
 
-            #region Ghost pathfinding for red behaviour
+            #region Ghost pathfinding for pink behaviour
 
             if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
             {
-                int xDelta = Math.Abs((ghostCoords.X - playerCoords.X));
-                int yDelta = Math.Abs((ghostCoords.Y - playerCoords.Y));
+                Point predictedCoords;
+                predictedCoords.X = playerCoords.X;
+                predictedCoords.Y = playerCoords.Y;
+
+                // based on direction tries to estimate in front of the player by one tile to try and get slightly more accurate and predicting
+                if (player.Direction == Direction.Right)
+                    predictedCoords.X = playerCoords.X + 1;
+                else if (player.Direction == Direction.Left)
+                    predictedCoords.X = playerCoords.X - 1;
+                else if (player.Direction == Direction.Up)
+                    predictedCoords.Y = playerCoords.Y + 1;
+                else if (player.Direction == Direction.Down)
+                    predictedCoords.Y = playerCoords.Y - 1;
+
+                int whichPathFinding = rand.Next(0,1);
+
+                // calculates which path is closer purely based on distance between x and y of the player and ghost. Flips between them randomly
+                int xDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.X - predictedCoords.X)) : Math.Abs((ghostCoords.X - playerCoords.X));
+                int yDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.Y - predictedCoords.Y)) : Math.Abs((ghostCoords.Y - playerCoords.Y));
 
                 if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                 {
@@ -2017,8 +2097,7 @@ namespace PacManLib
                     this.lives--;
                     this.player.Alive = false;
 
-                    soundChomp = GameManager.ContentManager.Load<SoundEffect>("Sounds/chomp");
-                    soundChomp.Play();
+                    chompInstance.Play();
 
                     // Set game over to true if the player doesn't have any lives left.
                     if (this.lives == 0)

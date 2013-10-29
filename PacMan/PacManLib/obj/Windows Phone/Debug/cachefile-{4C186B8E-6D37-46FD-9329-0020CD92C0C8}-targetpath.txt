@@ -2,7 +2,6 @@ Content\BlackTexture.xnb
 Content\Bullet.xnb
 Content\Life.xnb
 Content\Pacman.xnb
-Content\Font.xnb
 Content\Ghosts\BlueGhost.xnb
 Content\Ghosts\BlueGhostGodMode.xnb
 Content\Ghosts\GreenGhost.xnb
@@ -14,7 +13,8 @@ Content\Ghosts\YellowGhostGodMode.xnb
 Content\Tiles\Door.xnb
 Content\Tiles\Fruits.xnb
 Content\Tiles\Tileset.xnb
+Content\PacmanGodMode.xnb
+Content\Font.xnb
 Content\Sounds\chomp.xnb
 Content\Sounds\coin.xnb
 Content\Sounds\god_mode.xnb
-Content\PacmanGodMode.xnb
