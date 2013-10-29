@@ -49,7 +49,6 @@ namespace PacManLib
         };
 
         public const int BulletCost = 0;
-        public const int IronBulletCost = 0;
 
         public const int FruitDespawnInSeconds = 30;
         public const int FruitMinSpawnTimerInSeconds = 0;
@@ -80,6 +79,7 @@ namespace PacManLib
         private int dotsAndRingsLeft = 0;
         private int lives = 3;
         private int score = 0;
+        private int ironBullets = 0;
 
         private float fruitSpawnTimer = 0;
         private float startGameTimer = 0;
@@ -519,12 +519,12 @@ namespace PacManLib
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 8, 17, 7, 1, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 10, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 16, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 10 },
+                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 8, 18, 7, 1, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
+                    { 10, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 10 },
                     { 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 5, 1, 1, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0 },
                     { 9, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 9 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 1, 1, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 16, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
+                    { 2, 0, 2, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
                     { 2, 0, 2, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
@@ -1955,7 +1955,7 @@ namespace PacManLib
         private void TwoFingerFire()
         {
             // Only one bullet can be alive and you need atleast BulletCost in score..
-            if (!this.bulletAlive && this.score >= PacManSX.IronBulletCost)
+            if (!this.bulletAlive && this.ironBullets > 0 && this.score >= PacManSX.GhostScore)
             {
                 this.bulletMotion = this.player.Motion;
 
@@ -1971,7 +1971,8 @@ namespace PacManLib
 
                 this.bulletAlive = true;
                 this.ironBullet = true;
-                this.score -= PacManSX.BulletCost;
+                this.ironBullets--;
+                this.score -= PacManSX.GhostScore;
             }
         }
 
@@ -2069,21 +2070,25 @@ namespace PacManLib
                 {
                     this.blueGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
+                    this.ironBullets++;
                 }
                 else if (this.greenGhost != null && this.greenGhost.Alive && this.greenGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.greenGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
+                    this.ironBullets++;
                 }
                 else if (this.yellowGhost != null && this.yellowGhost.Alive && this.yellowGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.yellowGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
+                    this.ironBullets++;
                 }
                 else if (this.purpleGhost != null && this.purpleGhost.Alive && this.purpleGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.purpleGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
+                    this.ironBullets++;
                 }
             }
             else
