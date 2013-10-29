@@ -111,7 +111,6 @@ namespace PacManLib
 
         private SoundEffectInstance godmodeInstance;
         private SoundEffectInstance chompInstance;
-        private SoundEffectInstance eatScoreInstance;
         private SoundEffect soundGodMode;
         private SoundEffect soundChomp;
         private SoundEffect soundEatScore;
@@ -152,9 +151,10 @@ namespace PacManLib
             soundChomp = gameManager.ContentManager.Load<SoundEffect>("Sounds\\chomp");
             soundGodMode = gameManager.ContentManager.Load<SoundEffect>("Sounds\\god_mode");
             
-            eatScoreInstance = soundEatScore.CreateInstance();
             chompInstance = soundChomp.CreateInstance();
             godmodeInstance = soundGodMode.CreateInstance();
+            godmodeInstance.Volume = 0.75f;
+            godmodeInstance.IsLooped = true;
 
             // Create the tile map and load the first map.
             this.tileMap = new TileMap(gameManager);
@@ -245,6 +245,7 @@ namespace PacManLib
                     {
                         this.player.GodMode = false;
                         this.godModeTimer = 0;
+                        godmodeInstance.Stop();
                     }
                 }
 
@@ -507,7 +508,7 @@ namespace PacManLib
         /// </summary>
         private void LoadMap(int level)
         {
-            if (level == 1)
+            if (level > 0)
             {
                 this.tileMap.LoadMap(level, new int[,]
                 {
@@ -600,6 +601,9 @@ namespace PacManLib
 
             this.fruitSpawned = false;
 
+            if (this.godmodeInstance.State == SoundState.Playing)
+                this.godmodeInstance.Stop();
+
             // Start the game countdown.
             this.gameCountdown = 3;
             this.gameStarted = false;
@@ -626,14 +630,7 @@ namespace PacManLib
 
             //Play godmode music if not active
             if (godmodeInstance.State == SoundState.Stopped)
-            {
-                godmodeInstance.Volume = 0.75f;
-                godmodeInstance.IsLooped = true;
                 godmodeInstance.Play();
-            }
-
-            if (player.GodMode == false)
-                godmodeInstance.Stop();
         }
 
         /// <summary>
@@ -652,7 +649,7 @@ namespace PacManLib
             this.dotsAndRingsLeft--;
 
             // Sound for walking over a coin/ring
-            eatScoreInstance.Play();
+            soundEatScore.Play();
         }
 
         /// <summary>
@@ -1198,20 +1195,11 @@ namespace PacManLib
                 int xDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.X - predictedCoords.X)) : Math.Abs((ghostCoords.X - playerCoords.X));
                 int yDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.Y - predictedCoords.Y)) : Math.Abs((ghostCoords.Y - playerCoords.Y));
 
-                int randomNumber = rand.Next(1, 5);
-
-                int reverseOrNot = randomNumber % 5;
-
-
-
                 if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                 {
                     if (xDelta > yDelta)
                     {
                         direction = Direction.Right;
-
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1237,7 +1225,6 @@ namespace PacManLib
                     else
                     {
                         direction = Direction.Up;
-                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1266,7 +1253,6 @@ namespace PacManLib
                     if (xDelta > yDelta)
                     {
                         direction = Direction.Right;
-                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1292,7 +1278,6 @@ namespace PacManLib
                     else
                     {
                         direction = Direction.Down;
-                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1321,7 +1306,6 @@ namespace PacManLib
                     if (xDelta > yDelta)
                     {
                         direction = Direction.Left;
-                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1347,7 +1331,6 @@ namespace PacManLib
                     else
                     {
                         direction = Direction.Down;
-                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1376,7 +1359,6 @@ namespace PacManLib
                     if (xDelta > yDelta)
                     {
                         direction = Direction.Left;
-                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1402,7 +1384,6 @@ namespace PacManLib
                     else
                     {
                         direction = Direction.Up;
-                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1428,6 +1409,12 @@ namespace PacManLib
             }
 
             #endregion
+
+
+            int randomNumber = rand.Next(1, 5);
+
+            // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+            direction = (randomNumber % 5 == 0) ? direction : reverseMovement(direction);
 
             return direction;
         }
