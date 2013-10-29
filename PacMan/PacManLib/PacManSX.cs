@@ -973,15 +973,29 @@ namespace PacManLib
 #elif WINDOWS_PHONE
             // If we're using Windows Phone use the Tap gesture to fire and the accelerometer to move.
 
+            int touchCount = TouchPanel.GetState().Count;
             // If Gesture is available.
-            if (TouchPanel.IsGestureAvailable)
+            while (TouchPanel.IsGestureAvailable)
             {
-                // Read it.
-                GestureSample gesture = TouchPanel.ReadGesture();
+                // If we've more than one touch location.
+                if (touchCount > 1)
+                {
+                    // Check for two finger tap.
+                    GestureSample firstGesture = TouchPanel.ReadGesture();
+                    GestureSample secondGesture = TouchPanel.ReadGesture();
 
-                // If it's a Tap gesture then fire a bullet.
-                if (gesture.GestureType == GestureType.Tap)
-                    Fire();
+                    if (firstGesture.GestureType == GestureType.Tap && secondGesture.GestureType == GestureType.Tap)
+                        TwoFingerFire();
+                }
+                else if (touchCount == 1)
+                {
+                    // Read it.
+                    GestureSample gesture = TouchPanel.ReadGesture();
+
+                    // If it's a Tap gesture then fire a bullet.
+                    if (gesture.GestureType == GestureType.Tap)
+                        Fire();
+                }
             }
 
             // If the accelerometer is active.
@@ -1138,7 +1152,7 @@ namespace PacManLib
         }
 
         /// <summary>
-        /// Method for firing the gun :!
+        /// Method for firing the gun with a single tap :!
         /// </summary>
         private void Fire()
         {
@@ -1160,6 +1174,14 @@ namespace PacManLib
                 this.bulletAlive = true;
                 this.score -= PacManSX.BulletCost;
             }
+        }
+
+        /// <summary>
+        /// Method for firing the gun with a two finger tap.
+        /// </summary>
+        private void TwoFingerFire()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
