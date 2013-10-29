@@ -1198,11 +1198,20 @@ namespace PacManLib
                 int xDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.X - predictedCoords.X)) : Math.Abs((ghostCoords.X - playerCoords.X));
                 int yDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.Y - predictedCoords.Y)) : Math.Abs((ghostCoords.Y - playerCoords.Y));
 
+                int randomNumber = rand.Next(1, 5);
+
+                int reverseOrNot = randomNumber % 5;
+
+
+
                 if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                 {
                     if (xDelta > yDelta)
                     {
                         direction = Direction.Right;
+
+                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1228,6 +1237,7 @@ namespace PacManLib
                     else
                     {
                         direction = Direction.Up;
+                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1256,6 +1266,7 @@ namespace PacManLib
                     if (xDelta > yDelta)
                     {
                         direction = Direction.Right;
+                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1281,6 +1292,7 @@ namespace PacManLib
                     else
                     {
                         direction = Direction.Down;
+                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1309,6 +1321,7 @@ namespace PacManLib
                     if (xDelta > yDelta)
                     {
                         direction = Direction.Left;
+                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1334,6 +1347,7 @@ namespace PacManLib
                     else
                     {
                         direction = Direction.Down;
+                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1362,6 +1376,7 @@ namespace PacManLib
                     if (xDelta > yDelta)
                     {
                         direction = Direction.Left;
+                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1387,6 +1402,7 @@ namespace PacManLib
                     else
                     {
                         direction = Direction.Up;
+                        direction = (reverseOrNot == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
                             direction = reverseMovement(direction);
@@ -1412,12 +1428,6 @@ namespace PacManLib
             }
 
             #endregion
-
-
-            int randomNumber = rand.Next(1, 5);
-
-            // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-            direction = (randomNumber % 5 == 0) ? direction : reverseMovement(direction);
 
             return direction;
         }
