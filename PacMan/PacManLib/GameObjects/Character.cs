@@ -18,6 +18,7 @@ namespace PacManLib.GameObjects
     {
         #region Fields
 
+        private SpriteAnimation godmodeAnimation;
         private SpriteAnimation animation;
         private GameManager gameManager;
 
@@ -83,12 +84,13 @@ namespace PacManLib.GameObjects
         /// <param name="texture">The character spritesheet.</param>
         /// <param name="frameWidth">The width of a single frame.</param>
         /// <param name="frameHeight">The height of a single frame.</param>
-        public Character(GameManager gameManager, Vector2 position, Texture2D texture, int frameWidth, int frameHeight)
+        public Character(GameManager gameManager, Vector2 position, Texture2D texture, Texture2D godmodeTexture, int frameWidth, int frameHeight)
         {
             this.Alive = true;
             this.gameManager = gameManager;
             this.Position = position;
             this.origin = new Vector2(frameWidth / 2, frameHeight / 2);
+            this.godmodeAnimation = new SpriteAnimation(godmodeTexture, frameWidth, frameHeight);
             this.animation = new SpriteAnimation(texture, frameWidth, frameHeight);
         }
 
@@ -103,28 +105,45 @@ namespace PacManLib.GameObjects
         public void Update(TimeSpan elapsedGameTime)
         {
             if (this.Alive)
+            {
                 this.animation.Update(elapsedGameTime);
+                this.godmodeAnimation.Update(elapsedGameTime);
+            }
         }
 
         /// <summary>
         /// Allows the game to draw itself.
         /// </summary>
         /// <param name="elapsedGameTime">Elapsed time since the last draw.</param>
-        public void Draw(TimeSpan elapsedGameTime)
+        public void Draw(TimeSpan elapsedGameTime, bool playerInGodeMode)
         {
             if (!this.Alive)
                 return;
 
             this.gameManager.SpriteBatch.Begin();
 
-            if (this.Direction == Direction.Up)
-                this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 1.6f, this.origin, 1, SpriteEffects.None, 0);
-            else if (this.Direction == Direction.Down)
-                this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 1.6f, this.origin, 1, SpriteEffects.FlipHorizontally, 0);
-            else if (this.Direction == Direction.Right)
-                this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 0f, this.origin, 1, SpriteEffects.FlipHorizontally, 0);
-            else if (this.Direction == Direction.Left)
-                this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 0f, this.origin, 1, SpriteEffects.None, 0);
+            if (!playerInGodeMode)
+            {
+                if (this.Direction == Direction.Up)
+                    this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 1.6f, this.origin, 1, SpriteEffects.None, 0);
+                else if (this.Direction == Direction.Down)
+                    this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 1.6f, this.origin, 1, SpriteEffects.FlipHorizontally, 0);
+                else if (this.Direction == Direction.Right)
+                    this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 0f, this.origin, 1, SpriteEffects.FlipHorizontally, 0);
+                else if (this.Direction == Direction.Left)
+                    this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 0f, this.origin, 1, SpriteEffects.None, 0);
+            }
+            else
+            {
+                if (this.Direction == Direction.Up)
+                    this.gameManager.SpriteBatch.Draw(this.godmodeAnimation.Texture, this.Center, this.godmodeAnimation.CurrentSourceRectangle, Color.White, 1.6f, this.origin, 1, SpriteEffects.None, 0);
+                else if (this.Direction == Direction.Down)
+                    this.gameManager.SpriteBatch.Draw(this.godmodeAnimation.Texture, this.Center, this.godmodeAnimation.CurrentSourceRectangle, Color.White, 1.6f, this.origin, 1, SpriteEffects.FlipHorizontally, 0);
+                else if (this.Direction == Direction.Right)
+                    this.gameManager.SpriteBatch.Draw(this.godmodeAnimation.Texture, this.Center, this.godmodeAnimation.CurrentSourceRectangle, Color.White, 0f, this.origin, 1, SpriteEffects.FlipHorizontally, 0);
+                else if (this.Direction == Direction.Left)
+                    this.gameManager.SpriteBatch.Draw(this.godmodeAnimation.Texture, this.Center, this.godmodeAnimation.CurrentSourceRectangle, Color.White, 0f, this.origin, 1, SpriteEffects.None, 0);
+            }
 
             this.gameManager.SpriteBatch.End();
         }

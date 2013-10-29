@@ -92,12 +92,12 @@ namespace PacMan
             if (e.Orientation == PageOrientation.LandscapeLeft)
             {
                 if (this.pacMan != null && this.pacMan.GameManager != null)
-                    this.pacMan.GameManager.Orientation = DisplayOrientation.LandscapeLeft;
+                    this.pacMan.GameManager.DisplayOrientation = DisplayOrientation.LandscapeLeft;
             }
             else if (e.Orientation == PageOrientation.LandscapeRight)
             {
                 if (this.pacMan != null && this.pacMan.GameManager != null)
-                    this.pacMan.GameManager.Orientation = DisplayOrientation.LandscapeRight;
+                    this.pacMan.GameManager.DisplayOrientation = DisplayOrientation.LandscapeRight;
             }
 
             base.OnOrientationChanged(e);

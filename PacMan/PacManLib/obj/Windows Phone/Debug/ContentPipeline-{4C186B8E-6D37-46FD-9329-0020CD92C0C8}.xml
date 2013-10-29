@@ -2,31 +2,13 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>tileset.png</Source>
-      <Name>tileset</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\tileset.xnb</Output>
-      <Time>2013-10-28T22:23:36+01:00</Time>
-    </Item>
-    <Item>
       <Source>BlackTexture.png</Source>
       <Name>BlackTexture</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\BlackTexture.xnb</Output>
-      <Time>2013-10-28T22:23:36+01:00</Time>
-    </Item>
-    <Item>
-      <Source>BlueGhost.png</Source>
-      <Name>BlueGhost</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\BlueGhost.xnb</Output>
-      <Time>2013-10-28T22:23:36+01:00</Time>
+      <Time>2013-10-28T17:07:19+01:00</Time>
     </Item>
     <Item>
       <Source>Bullet.png</Source>
@@ -35,25 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Bullet.xnb</Output>
-      <Time>2013-10-28T22:23:36+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Door.png</Source>
-      <Name>Door</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Door.xnb</Output>
-      <Time>2013-10-28T22:23:36+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Fruits.png</Source>
-      <Name>Fruits</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Fruits.xnb</Output>
-      <Time>2013-10-28T22:23:36+01:00</Time>
+      <Time>2013-10-28T18:09:15+01:00</Time>
     </Item>
     <Item>
       <Source>Life.png</Source>
@@ -62,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Life.xnb</Output>
-      <Time>2013-10-28T22:23:36+01:00</Time>
+      <Time>2013-10-28T15:30:17+01:00</Time>
     </Item>
     <Item>
       <Source>Pacman.png</Source>
@@ -71,34 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Pacman.xnb</Output>
-      <Time>2013-10-28T22:23:36+01:00</Time>
-    </Item>
-    <Item>
-      <Source>chomp.wav</Source>
-      <Name>chomp</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\chomp.xnb</Output>
-      <Time>2013-10-28T22:23:36.328261+01:00</Time>
-    </Item>
-    <Item>
-      <Source>coin.wav</Source>
-      <Name>coin</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\coin.xnb</Output>
-      <Time>2013-10-28T22:23:36.3652374+01:00</Time>
-    </Item>
-    <Item>
-      <Source>god_mode.wav</Source>
-      <Name>god_mode</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\god_mode.xnb</Output>
-      <Time>2013-10-28T22:23:36.4002416+01:00</Time>
+      <Time>2013-10-28T15:23:38+01:00</Time>
     </Item>
     <Item>
       <Source>Font.spritefont</Source>
@@ -107,7 +44,142 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Font.xnb</Output>
-      <Time>2013-10-28T22:23:36.3692541+01:00</Time>
+      <Time>2013-10-28T15:23:38.8829281+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\BlueGhost.png</Source>
+      <Name>Ghosts\BlueGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\BlueGhost.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\BlueGhostGodMode.png</Source>
+      <Name>Ghosts\BlueGhostGodMode</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\BlueGhostGodMode.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\GreenGhost.png</Source>
+      <Name>Ghosts\GreenGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GreenGhost.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\GreenGhostGodMode.png</Source>
+      <Name>Ghosts\GreenGhostGodMode</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GreenGhostGodMode.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\PurpleGhost.png</Source>
+      <Name>Ghosts\PurpleGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\PurpleGhost.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\PurpleGhostGodMode.png</Source>
+      <Name>Ghosts\PurpleGhostGodMode</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\PurpleGhostGodMode.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\YellowGhost.png</Source>
+      <Name>Ghosts\YellowGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\YellowGhost.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\YellowGhostGodMode.png</Source>
+      <Name>Ghosts\YellowGhostGodMode</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\YellowGhostGodMode.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Tiles\Door.png</Source>
+      <Name>Tiles\Door</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Tiles\Door.xnb</Output>
+      <Time>2013-10-28T18:11:11+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Tiles\Fruits.png</Source>
+      <Name>Tiles\Fruits</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Tiles\Fruits.xnb</Output>
+      <Time>2013-10-28T21:04:24+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Tiles\Tileset.png</Source>
+      <Name>Tiles\Tileset</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Tiles\Tileset.xnb</Output>
+      <Time>2013-10-29T15:34:49+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\chomp.wav</Source>
+      <Name>Sounds\chomp</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\chomp.xnb</Output>
+      <Time>2013-10-28T15:23:38.8849286+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\coin.wav</Source>
+      <Name>Sounds\coin</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\coin.xnb</Output>
+      <Time>2013-10-28T15:23:38.8869285+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\god_mode.wav</Source>
+      <Name>Sounds\god_mode</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\god_mode.xnb</Output>
+      <Time>2013-10-28T15:23:38.9029306+01:00</Time>
+    </Item>
+    <Item>
+      <Source>PacmanGodMode.png</Source>
+      <Name>PacmanGodMode</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\PacmanGodMode.xnb</Output>
+      <Time>2013-10-28T15:23:38+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

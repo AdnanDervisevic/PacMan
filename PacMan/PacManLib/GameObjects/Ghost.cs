@@ -43,8 +43,8 @@ namespace PacManLib.GameObjects
         /// <param name="texture">The players spritesheet.</param>
         /// <param name="frameWidth">The width of a single frame.</param>
         /// <param name="frameHeight">The height of a single frame.</param>
-        public Ghost(GameManager gameManager, Vector2 position, Texture2D texture, int frameWidth, int frameHeight)
-            : base(gameManager, position, texture, frameWidth, frameHeight)
+        public Ghost(GameManager gameManager, Vector2 position, Texture2D texture, Texture2D godModeTexture, int frameWidth, int frameHeight)
+            : base(gameManager, position, texture, godModeTexture, frameWidth, frameHeight)
         {
             this.Speed = 120;
         }

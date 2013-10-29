@@ -45,6 +45,11 @@ namespace PacManLib
         public ContentManager ContentManager { get; private set; }
 
         /// <summary>
+        /// Gets or sets the display orientation. This is set automatically and should never be set manually.
+        /// </summary>
+        public DisplayOrientation DisplayOrientation { get; set; }
+
+        /// <summary>
         /// Gets the height of the screen in pixels.
         /// </summary>
         public int ScreenWidth { get; private set; }
@@ -53,11 +58,6 @@ namespace PacManLib
         /// Gets the width of the screen in pixels.
         /// </summary>
         public int ScreenHeight { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the Orientation
-        /// </summary>
-        public DisplayOrientation Orientation { get; set; }
 
         #endregion
 

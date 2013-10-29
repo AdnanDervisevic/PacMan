@@ -64,9 +64,9 @@ namespace PacManLib.Map
         {
             this.gameManager = gameManager;
             this.tileset = new Tileset(
-                this.gameManager.ContentManager.Load<Texture2D>("Tileset"),
+                this.gameManager.ContentManager.Load<Texture2D>("Tiles/Tileset"),
                 PacManSX.TileWidth, PacManSX.TileHeight);
-            this.doorTexture = this.gameManager.ContentManager.Load<Texture2D>("Door");
+            this.doorTexture = this.gameManager.ContentManager.Load<Texture2D>("Tiles/Door");
         }
 
         #endregion
