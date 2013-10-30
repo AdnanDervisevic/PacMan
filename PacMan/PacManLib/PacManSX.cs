@@ -81,8 +81,8 @@ namespace PacManLib
         private int gameCountdown = 3;
         private int dotsAndRingsLeft = 0;
         private int lives = 3;
-        private int score = 1000;
-        private int ironBullets = 5;
+        private int score = 0;
+        private int ironBullets = 0;
         private int bulletsFired = 0;
 
         private float fruitSpawnTimer = 0;
@@ -170,44 +170,44 @@ namespace PacManLib
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.player = new Player(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                this.player = new Player(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
                     this.GameManager.ContentManager.Load<Texture2D>("Pacman"), this.GameManager.ContentManager.Load<Texture2D>("PacmanGodMode"), 
-                    PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                    PacManSX.CharacterWidth, PacManSX.CharacterHeight);
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.blueGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                this.blueGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/BlueGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/BlueGhostGodMode"), 
-                    PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                    PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.blueGhost.GhostAI += blueGhostAI;
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.greenGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                this.greenGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GreenGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GreenGhostGodMode"),
-                    PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                    PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.greenGhost.GhostAI += greenGhostAI;
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.yellowGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                this.yellowGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/YellowGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/YellowGhostGodMode"),
-                    PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                    PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.yellowGhost.GhostAI += yellowGhostAI;
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.purpleGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]),
+                this.purpleGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/PurpleGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/PurpleGhostGodMode"),
-                    PacManSX.CharacterWidth, PacManSX.CharacterHeight) { Direction = Direction.Right };
+                    PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.purpleGhost.GhostAI += purpleGhostAI;
             }
 
@@ -417,9 +417,10 @@ namespace PacManLib
 
                         this.fruitSpawnTime = rand.Next(PacManSX.FruitMinSpawnTimerInSeconds, PacManSX.FruitMaxSpawnTimerInSeconds);
 
-                        this.accelCalibrated = false;
                         this.gameStarted = true;
 #if WINDOWS_PHONE
+                        this.accelCalibrated = false;
+
                         if (!this.accelActive)
                         {
                             try
@@ -590,7 +591,8 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.player.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
-                this.player.Direction = Direction.Right;
+                this.player.Direction = this.player.StartDirection;
+                this.player.NextDirection = Direction.None;
                 this.player.Alive = true;
                 this.player.GodMode = false;
             }
@@ -599,7 +601,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.blueGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
-                this.blueGhost.Direction = Direction.Right;
+                this.blueGhost.Direction = this.blueGhost.StartDirection;
                 this.blueGhost.Alive = true;
             }
             i++;
@@ -607,7 +609,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.greenGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
-                this.greenGhost.Direction = Direction.Right;
+                this.greenGhost.Direction = this.greenGhost.StartDirection;
                 this.greenGhost.Alive = true;
             }
             i++;
@@ -615,7 +617,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.yellowGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
-                this.yellowGhost.Direction = Direction.Right;
+                this.yellowGhost.Direction = this.yellowGhost.StartDirection;
                 this.yellowGhost.Alive = true;
             }
             i++;
@@ -623,7 +625,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.purpleGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
-                this.purpleGhost.Direction = Direction.Right;
+                this.purpleGhost.Direction = this.purpleGhost.StartDirection;
                 this.purpleGhost.Alive = true;
             }
 
@@ -1792,6 +1794,9 @@ namespace PacManLib
 
             if (keyboardState.IsKeyDown(Keys.Space))
                 Fire();
+            else if (keyboardState.IsKeyDown(Keys.LeftControl))
+                TwoFingerFire();
+
 #elif WINDOWS_PHONE
             // If we're using Windows Phone use the Tap gesture to fire and the accelerometer to move.
 
