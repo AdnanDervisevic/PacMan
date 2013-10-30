@@ -9,8 +9,14 @@ namespace PacMan
     /// </summary>
     public class AppServiceProvider : IServiceProvider
     {
+        #region Consts
+
         // A map of service type to the services themselves
         private readonly Dictionary<Type, object> services = new Dictionary<Type, object>();
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Adds a new service to the service provider.
@@ -59,5 +65,7 @@ namespace PacMan
             // Remove the service from the dictionary
             services.Remove(serviceType);
         }
+
+        #endregion
     }
 }

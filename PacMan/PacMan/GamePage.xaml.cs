@@ -1,32 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿#region File Description
+    //////////////////////////////////////////////////////////////////////////
+   // GamePage                                                             //
+  //                                                                      //
+ // Copyright (C) Veritas. All Rights reserved.                          //
+//////////////////////////////////////////////////////////////////////////
+#endregion
+
+#region Using Statements
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PacManLib;
+#endregion End of Using Statements
 
 namespace PacMan
 {
     public partial class GamePage : PhoneApplicationPage
     {
-        private PacManSX pacMan;
-        private GameTimer timer;
+        #region Fields
 
+        private PacManSX pacMan = null;
+        private GameTimer timer = null;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Constructs a new game page.
+        /// </summary>
         public GamePage()
         {
             InitializeComponent();
 
-            // Initializes the game and passes the content manager from the application.
-            
             // Create a timer for this page
             timer = new GameTimer();
             timer.UpdateInterval = TimeSpan.FromTicks(333333);
@@ -34,6 +43,14 @@ namespace PacMan
             timer.Draw += OnDraw;
         }
 
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Method runs when you navigate to the game page.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Set the sharing mode of the graphics device to turn on XNA rendering
@@ -52,6 +69,10 @@ namespace PacMan
             base.OnNavigatedTo(e);
         }
 
+        /// <summary>
+        /// Method runs when you navigate away from the game page.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             // Stop the timer
@@ -62,6 +83,10 @@ namespace PacMan
 
             base.OnNavigatedFrom(e);
         }
+
+        #endregion
+
+        #region Private Helpers
 
         /// <summary>
         /// Allows the page to run logic such as updating the world,
@@ -82,25 +107,6 @@ namespace PacMan
             this.pacMan.Draw(e.ElapsedTime);
         }
 
-        /// <summary>
-        /// Event fired when the phone changes orientation, this is used to track whether we should adapt
-        /// the controls for landscape left or right.
-        /// </summary>
-        /// <param name="e">The Orientation changed event arguments.</param>
-        protected override void OnOrientationChanged(OrientationChangedEventArgs e)
-        {
-            if (e.Orientation == PageOrientation.LandscapeLeft)
-            {
-                if (this.pacMan != null && this.pacMan.GameManager != null)
-                    this.pacMan.GameManager.DisplayOrientation = DisplayOrientation.LandscapeLeft;
-            }
-            else if (e.Orientation == PageOrientation.LandscapeRight)
-            {
-                if (this.pacMan != null && this.pacMan.GameManager != null)
-                    this.pacMan.GameManager.DisplayOrientation = DisplayOrientation.LandscapeRight;
-            }
-
-            base.OnOrientationChanged(e);
-        }
+        #endregion
     }
 }

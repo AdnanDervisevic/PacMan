@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PacManLib.GameObjects
 {
-    public class Character
+    public abstract class Character
     {
         #region Fields
 
@@ -102,7 +102,7 @@ namespace PacManLib.GameObjects
         /// Allows the game to update itself.
         /// </summary>
         /// <param name="elapsedGameTime">Elapsed time since the last update.</param>
-        public void Update(TimeSpan elapsedGameTime)
+        public virtual void Update(TimeSpan elapsedGameTime)
         {
             if (this.Alive)
             {

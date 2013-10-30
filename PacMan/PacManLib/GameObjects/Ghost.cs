@@ -17,6 +17,13 @@ namespace PacManLib.GameObjects
 {
     public sealed class Ghost : Character
     {
+        #region Fields
+
+        private Vector2 SpawnPosition;
+        private float respawnTimer = 0;
+
+        #endregion
+
         #region Events
 
         /// <summary>
@@ -46,12 +53,35 @@ namespace PacManLib.GameObjects
         public Ghost(GameManager gameManager, Vector2 position, Texture2D texture, Texture2D godModeTexture, int frameWidth, int frameHeight)
             : base(gameManager, position, texture, godModeTexture, frameWidth, frameHeight)
         {
+            this.SpawnPosition = position;
             this.Speed = 120;
         }
 
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// Allows the game to update itself.
+        /// </summary>
+        /// <param name="elapsedGameTime">Elapsed time since the last update.</param>
+        public override void Update(TimeSpan elapsedGameTime)
+        {
+            // If the ghost is dead then wait X seconds and revive it at the spawn location.
+            if (!this.Alive)
+            {
+                respawnTimer += (float)elapsedGameTime.TotalSeconds;
+
+                if (respawnTimer >= PacManSX.GhostRespawnInSeconds)
+                {
+                    this.Alive = true;
+                    this.Position = this.SpawnPosition;
+                    this.respawnTimer = 0;
+                }
+            }
+
+            base.Update(elapsedGameTime);
+        }
 
         /// <summary>
         /// Method handling the movement for this ghost.
