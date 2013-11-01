@@ -1233,7 +1233,7 @@ namespace PacManLib
                     {
                         direction = Direction.Right;
 
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                         direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
@@ -1261,7 +1261,7 @@ namespace PacManLib
                     {
                         direction = Direction.Up;
 
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                         direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
@@ -1292,7 +1292,7 @@ namespace PacManLib
                     {
                         direction = Direction.Right;
 
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                         direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
@@ -1302,7 +1302,7 @@ namespace PacManLib
                         {
                             direction = Direction.Down;
 
-                            // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                            // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                             direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
@@ -1322,7 +1322,7 @@ namespace PacManLib
                     {
                         direction = Direction.Down;
 
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                         direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
@@ -1353,7 +1353,7 @@ namespace PacManLib
                     {
                         direction = Direction.Left;
 
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                         direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
@@ -1381,7 +1381,7 @@ namespace PacManLib
                     {
                         direction = Direction.Down;
 
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                         direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
@@ -1412,7 +1412,7 @@ namespace PacManLib
                     {
                         direction = Direction.Left;
 
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                         direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
@@ -1440,7 +1440,7 @@ namespace PacManLib
                     {
                         direction = Direction.Up;
 
-                        // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                         direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                         if (player.GodMode)
@@ -1450,7 +1450,7 @@ namespace PacManLib
                         {
                             direction = Direction.Left;
 
-                            // He has a 1 in 5 chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                            // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                             direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
