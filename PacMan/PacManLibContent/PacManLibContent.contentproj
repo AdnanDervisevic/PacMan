@@ -71,18 +71,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Ghosts\BlueGhostGodMode.png">
-      <Name>BlueGhostGodMode</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Ghosts\GreenGhost.png">
       <Name>GreenGhost</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Ghosts\GreenGhostGodMode.png">
-      <Name>GreenGhostGodMode</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -91,18 +81,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Ghosts\PurpleGhostGodMode.png">
-      <Name>PurpleGhostGodMode</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Ghosts\YellowGhost.png">
       <Name>YellowGhost</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Ghosts\YellowGhostGodMode.png">
-      <Name>YellowGhostGodMode</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -138,8 +118,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PacmanGodMode.png">
-      <Name>PacmanGodMode</Name>
+    <Compile Include="Ghosts\AmmoGhost.png">
+      <Name>AmmoGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ghosts\GodMode.png">
+      <Name>GodMode</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

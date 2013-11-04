@@ -112,6 +112,7 @@ namespace PacManLib
         private Texture2D bulletTexture;
         private Texture2D BlackTexture;
         private Texture2D lifeTexture;
+        private Texture2D ghostBulletTexture;
 
         private SoundEffectInstance godmodeInstance;
         private SoundEffectInstance chompInstance;
@@ -150,6 +151,7 @@ namespace PacManLib
             this.BlackTexture = this.GameManager.ContentManager.Load<Texture2D>("BlackTexture");
             this.fruitTileset = new Tileset(this.GameManager.ContentManager.Load<Texture2D>("Tiles/Fruits"),
                 PacManSX.TileWidth, PacManSX.TileHeight);
+            this.ghostBulletTexture = this.GameManager.ContentManager.Load<Texture2D>("Ghosts/AmmoGhost");
 
             soundEatScore = gameManager.ContentManager.Load<SoundEffect>("Sounds\\coin");
             soundChomp = gameManager.ContentManager.Load<SoundEffect>("Sounds\\chomp");
@@ -171,7 +173,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.player = new Player(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
-                    this.GameManager.ContentManager.Load<Texture2D>("Pacman"), this.GameManager.ContentManager.Load<Texture2D>("PacmanGodMode"), 
+                    this.GameManager.ContentManager.Load<Texture2D>("Pacman"), null, 
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
             }
             i++;
@@ -179,7 +181,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.blueGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
-                    this.GameManager.ContentManager.Load<Texture2D>("Ghosts/BlueGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/BlueGhostGodMode"), 
+                    this.GameManager.ContentManager.Load<Texture2D>("Ghosts/BlueGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"), 
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.blueGhost.GhostAI += blueGhostAI;
             }
@@ -188,7 +190,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.greenGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
-                    this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GreenGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GreenGhostGodMode"),
+                    this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GreenGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.greenGhost.GhostAI += greenGhostAI;
             }
@@ -197,7 +199,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.yellowGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
-                    this.GameManager.ContentManager.Load<Texture2D>("Ghosts/YellowGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/YellowGhostGodMode"),
+                    this.GameManager.ContentManager.Load<Texture2D>("Ghosts/YellowGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.yellowGhost.GhostAI += yellowGhostAI;
             }
@@ -206,7 +208,7 @@ namespace PacManLib
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
                 this.purpleGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
-                    this.GameManager.ContentManager.Load<Texture2D>("Ghosts/PurpleGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/PurpleGhostGodMode"),
+                    this.GameManager.ContentManager.Load<Texture2D>("Ghosts/PurpleGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.purpleGhost.GhostAI += purpleGhostAI;
             }
@@ -482,6 +484,10 @@ namespace PacManLib
             for (int i = 0; i < this.lives; i++)
                 this.GameManager.SpriteBatch.Draw(this.lifeTexture, new Vector2(GameManager.ScreenWidth - lives * 20 - 4, 4) + new Vector2(20 * i, 0), Color.White);
             this.GameManager.SpriteBatch.DrawString(this.font, "Score: " + this.score, this.scorePosition, Color.White);
+
+            this.GameManager.SpriteBatch.DrawString(this.font, "Iron Bullets: " + this.ironBullets + "x", new Vector2(this.GameManager.ScreenWidth - 400, 0), Color.White);
+            this.GameManager.SpriteBatch.Draw(this.ghostBulletTexture, new Vector2(this.GameManager.ScreenWidth - 225, 2), Color.White);
+
             this.GameManager.SpriteBatch.End();
             
             // If the game has not started then draw a countdown.
@@ -568,10 +574,10 @@ namespace PacManLib
 
                 this.tileMap.UpdateTile(new Point(14, 17), SpawnPoint.Fruit);
                 this.tileMap.UpdateTile(new Point(1, 1), SpawnPoint.Player);
-                /*this.tileMap.UpdateTile(new Point(21, 1), SpawnPoint.BlueGhost);
+                this.tileMap.UpdateTile(new Point(21, 1), SpawnPoint.BlueGhost);
                 this.tileMap.UpdateTile(new Point(23, 1), SpawnPoint.GreenGhost);
                 this.tileMap.UpdateTile(new Point(25, 1), SpawnPoint.YellowGhost);
-                this.tileMap.UpdateTile(new Point(27, 1), SpawnPoint.PurpleGhost);*/
+                this.tileMap.UpdateTile(new Point(27, 1), SpawnPoint.PurpleGhost);
             }
 
             this.dotsAndRingsLeft = this.tileMap.DotsAndRings();

@@ -97,7 +97,8 @@ namespace PacManLib.GameObjects
             this.Direction = startDirection;
             this.StartDirection = startDirection;
             this.origin = new Vector2(frameWidth / 2, frameHeight / 2);
-            this.godmodeAnimation = new SpriteAnimation(godmodeTexture, frameWidth, frameHeight);
+            if (godmodeTexture != null)
+                this.godmodeAnimation = new SpriteAnimation(godmodeTexture, frameWidth, frameHeight);
             this.animation = new SpriteAnimation(texture, frameWidth, frameHeight);
         }
 
@@ -114,7 +115,8 @@ namespace PacManLib.GameObjects
             if (this.Alive)
             {
                 this.animation.Update(elapsedGameTime);
-                this.godmodeAnimation.Update(elapsedGameTime);
+                if (this.godmodeAnimation != null)
+                    this.godmodeAnimation.Update(elapsedGameTime);
             }
         }
 
@@ -129,7 +131,7 @@ namespace PacManLib.GameObjects
 
             this.gameManager.SpriteBatch.Begin();
 
-            if (!playerInGodeMode)
+            if (!playerInGodeMode || this.godmodeAnimation == null)
             {
                 if (this.Direction == Direction.Up)
                     this.gameManager.SpriteBatch.Draw(this.animation.Texture, this.Center, this.animation.CurrentSourceRectangle, Color.White, 1.6f, this.origin, 1, SpriteEffects.None, 0);
