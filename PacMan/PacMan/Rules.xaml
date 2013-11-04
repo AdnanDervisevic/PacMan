@@ -1,0 +1,83 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="PacMan.Page1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#FF59A3FF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
+            	<Run Text="The rules of engagement"/>
+            	<Run Text=" for"/>
+            </TextBlock>
+            <TextBlock Text="Pac-Man SX" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock FontSize="24">Hey! Welcome to our game rules!</TextBlock>
+            <TextBlock Margin="0,43,0,10" FontSize="21">
+            	<Run Text="Pac-Man SX is a different take on the belove"/>
+            	<Run Text="d"/>
+            	<LineBreak/>
+            	<Run/>
+            	<Run Text="game Pac-Man."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="In it you will attempt to gather the most points "/>
+            	<LineBreak/>
+            	<Run Text="possible while staying away from the ghosts."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="There are "/>
+            	<Run Text="wooden"/>
+            	<Run Text=" and "/>
+            	<Run Text="iron "/>
+            	<Run Text="crates blocking some"/>
+            	<LineBreak/>
+            	<Run Text="paths. These can  be shot with Normal and"/>
+            	<LineBreak/>
+            	<Run Text="Ghost bullets"/>
+            	<Run Text=" respectively. You gain ghost "/>
+            	<LineBreak/>
+            	<Run Text="bullets when you kill ghosts! "/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="You shoot by double tapping, left side of th"/>
+            	<Run Text="e"/>
+            	<LineBreak/>
+            	<Run Text="screen for normal"/>
+            	<LineBreak/>
+            	<Run Text="bullets and the right for ghost bullets."/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="To kill ghosts, eat the rings and you will go into a special mode where you can eat the ghosts by touching them. "/>
+            	<LineBreak/>
+            	<Run/>
+            	<LineBreak/>
+            	<Run Text="To move just use the gyroscope. Have fun!"/>
+            </TextBlock>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
