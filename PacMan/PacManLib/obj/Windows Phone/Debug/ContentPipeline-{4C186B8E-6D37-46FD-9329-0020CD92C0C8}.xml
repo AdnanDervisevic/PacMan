@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\BlueGhost.xnb</Output>
-      <Time>2013-11-04T16:44:10.6577218+01:00</Time>
+      <Time>2013-11-05T21:31:08.3624717+01:00</Time>
     </Item>
     <Item>
       <Source>Ghosts\GreenGhost.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GreenGhost.xnb</Output>
-      <Time>2013-11-04T16:44:40.6562301+01:00</Time>
+      <Time>2013-11-05T21:30:07.8259616+01:00</Time>
     </Item>
     <Item>
       <Source>Ghosts\PurpleGhost.png</Source>
@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\YellowGhost.xnb</Output>
-      <Time>2013-11-04T16:45:12.3191584+01:00</Time>
+      <Time>2013-11-05T21:28:17.0495167+01:00</Time>
     </Item>
     <Item>
       <Source>Tiles\Door.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GodMode.xnb</Output>
-      <Time>2013-11-04T16:44:26.3116445+01:00</Time>
+      <Time>2013-11-05T21:33:46.2547296+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

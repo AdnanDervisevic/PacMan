@@ -21,6 +21,16 @@ namespace PacManLib.GameObjects
 
         private Vector2 SpawnPosition;
         private float respawnTimer = 0;
+        private Point previousGhostCoords;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets whether this ghost is in jail.
+        /// </summary>
+        public bool InJail { get; set; }
 
         #endregion
 
@@ -118,16 +128,14 @@ namespace PacManLib.GameObjects
                 {
                     // Run the ghost AI.
                     if (this.GhostAI != null && (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn))
-                    {
                         direction = this.GhostAI(this, ghostTile, ghostCoords, playerCoords, out motion);
-                    }
 
                     if (PacManSX.CanGhostMove(tileMap, ghostCoords, direction, out motion, out targetTile))
                     {
                         this.Motion = motion;
                         this.Direction = direction;
                     }
-                    else
+                    else if (!this.InJail)
                     {
                         // If the ghost can't move in that direction then check if the player can move in the old direction.
                         if (PacManSX.CanGhostMove(tileMap, ghostCoords, this.Direction, out motion, out targetTile))

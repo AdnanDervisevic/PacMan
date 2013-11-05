@@ -49,6 +49,7 @@ namespace PacManLib
 
         public const int PathTarget = 4;
 
+        public const int LeaveJailInSeconds = 1;
         public const int GhostRespawnInSeconds = 5;
         public const int FruitDespawnInSeconds = 30;
         public const int FruitMinSpawnTimerInSeconds = 0;
@@ -75,6 +76,7 @@ namespace PacManLib
         private bool fruitSpawned = false;
         private bool bulletAlive = false;
         private bool gameOver = false;
+        private bool leaveJail = false;
         private bool gameStarted = false;
         
         private int fruitSpawnTime = -1;
@@ -85,6 +87,7 @@ namespace PacManLib
         private int ghostBullets = 0;
         private int bulletsFired = 0;
 
+        private float leaveJailTimer = 0;
         private float fruitSpawnTimer = 0;
         private float startGameTimer = 0;
         private float godModeTimer = 0;
@@ -184,24 +187,27 @@ namespace PacManLib
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/BlueGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"), 
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.blueGhost.GhostAI += blueGhostAI;
+                this.blueGhost.InJail = true;
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.greenGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
+                this.greenGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Up,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GreenGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.greenGhost.GhostAI += greenGhostAI;
+                this.greenGhost.InJail = true;
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.yellowGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
+                this.yellowGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Left,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/YellowGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.yellowGhost.GhostAI += yellowGhostAI;
+                this.yellowGhost.InJail = true;
             }
             i++;
 
@@ -211,6 +217,7 @@ namespace PacManLib
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/PurpleGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.purpleGhost.GhostAI += purpleGhostAI;
+                this.purpleGhost.InJail = false;
             }
 
 #if WINDOWS_PHONE
@@ -302,6 +309,20 @@ namespace PacManLib
                             this.fruitSpawnTimer = 0;
                             this.fruitSpawned = false;
                         }
+                    }
+                }
+
+                if (
+                    (this.blueGhost != null && this.blueGhost.InJail) ||
+                    (this.greenGhost != null && this.greenGhost.InJail) ||
+                    (this.yellowGhost != null && this.yellowGhost.InJail) &&
+                    !this.leaveJail)
+                {
+                    this.leaveJailTimer += (float)elapsedGameTime.TotalSeconds;
+                    if (this.leaveJailTimer >= PacManSX.LeaveJailInSeconds)
+                    {
+                        this.leaveJail = true;
+                        this.leaveJailTimer = 0;
                     }
                 }
 
@@ -556,7 +577,7 @@ namespace PacManLib
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 5, 1, 1, 1, 1, 1, 1, 1, 6, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 17, 0, 0, 17, 0, 0, 17, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 0, 5, 8, 18, 7, 6, 0, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 0, 2, 0, 0, 0, 2, 0, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 0, 2, 17, 17, 17, 2, 0, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 10, 0, 3, 1, 1, 1, 4, 0, 10, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
@@ -564,7 +585,7 @@ namespace PacManLib
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 13, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
                     { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
@@ -572,6 +593,7 @@ namespace PacManLib
                     { 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 },
                 });
 
+                // Jail leave: Green > Yellow > Blue
                 this.tileMap.UpdateTile(new Point(24, 3), SpawnPoint.Player);
                 this.tileMap.UpdateTile(new Point(16, 9), SpawnPoint.BlueGhost);
                 this.tileMap.UpdateTile(new Point(17, 9), SpawnPoint.GreenGhost);
@@ -609,6 +631,7 @@ namespace PacManLib
                 this.blueGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
                 this.blueGhost.Direction = this.blueGhost.StartDirection;
                 this.blueGhost.Alive = true;
+                this.blueGhost.InJail = true;
             }
             i++;
 
@@ -617,6 +640,7 @@ namespace PacManLib
                 this.greenGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
                 this.greenGhost.Direction = this.greenGhost.StartDirection;
                 this.greenGhost.Alive = true;
+                this.greenGhost.InJail = true;
             }
             i++;
 
@@ -625,6 +649,7 @@ namespace PacManLib
                 this.yellowGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
                 this.yellowGhost.Direction = this.yellowGhost.StartDirection;
                 this.yellowGhost.Alive = true;
+                this.yellowGhost.InJail = true;
             }
             i++;
 
@@ -633,6 +658,7 @@ namespace PacManLib
                 this.purpleGhost.Position = PacManSX.ConvertCellToPosition(spawnCoords[i]);
                 this.purpleGhost.Direction = this.purpleGhost.StartDirection;
                 this.purpleGhost.Alive = true;
+                this.purpleGhost.InJail = false;
             }
 
             this.fruitSpawned = false;
@@ -643,6 +669,8 @@ namespace PacManLib
             // Start the game countdown.
             this.gameCountdown = 3;
             this.gameStarted = false;
+            this.leaveJailTimer = 0;
+            this.leaveJail = false;
         }
 
         /// <summary>
@@ -704,248 +732,271 @@ namespace PacManLib
             motion = ghost.Motion;
             Tile targetTile = null;
 
-            #region Cyan pathfinding tries to predict where the player will be in a few moments and thusly calculates what path it should take.
-
-            if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
+            if (!this.blueGhost.InJail)
             {
-                Point predictedCoords;
-                predictedCoords.X = playerCoords.X;
-                predictedCoords.Y = playerCoords.Y;
+                #region Cyan pathfinding tries to predict where the player will be in a few moments and thusly calculates what path it should take.
 
-                // based on direction tries to estimate in front of the player by one tile to try and get slightly more accurate and predicting
-                if (player.Direction == Direction.Right)
-                    predictedCoords.X = playerCoords.X + PacManSX.PathTarget;
-                else if (player.Direction == Direction.Left)
-                    predictedCoords.X = playerCoords.X - PacManSX.PathTarget;
-                else if (player.Direction == Direction.Up)
-                    predictedCoords.Y = playerCoords.Y + PacManSX.PathTarget;
-                else if (player.Direction == Direction.Down)
-                    predictedCoords.Y = playerCoords.Y - PacManSX.PathTarget;
-
-                // calculates which path is closer purely based on distance between x and y of the player and ghost
-                int xDelta = Math.Abs((ghostCoords.X - predictedCoords.X));
-                int yDelta = Math.Abs((ghostCoords.Y - predictedCoords.Y));
-
-                // Checks where approximately the ghost is based on the x & y coordinates
-                if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
+                if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
                 {
-                    // If closer in the x coordinate space than the y space
-                    if (xDelta > yDelta)
+                    Point predictedCoords;
+                    predictedCoords.X = playerCoords.X;
+                    predictedCoords.Y = playerCoords.Y;
+
+                    // based on direction tries to estimate in front of the player by one tile to try and get slightly more accurate and predicting
+                    if (player.Direction == Direction.Right)
+                        predictedCoords.X = playerCoords.X + PacManSX.PathTarget;
+                    else if (player.Direction == Direction.Left)
+                        predictedCoords.X = playerCoords.X - PacManSX.PathTarget;
+                    else if (player.Direction == Direction.Up)
+                        predictedCoords.Y = playerCoords.Y + PacManSX.PathTarget;
+                    else if (player.Direction == Direction.Down)
+                        predictedCoords.Y = playerCoords.Y - PacManSX.PathTarget;
+
+                    // calculates which path is closer purely based on distance between x and y of the player and ghost
+                    int xDelta = Math.Abs((ghostCoords.X - predictedCoords.X));
+                    int yDelta = Math.Abs((ghostCoords.Y - predictedCoords.Y));
+
+                    // Checks where approximately the ghost is based on the x & y coordinates
+                    if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                     {
-                        // Move right!
-                        direction = Direction.Right;
+                        // If closer in the x coordinate space than the y space
+                        if (xDelta > yDelta)
+                        {
+                            // Move right!
+                            direction = Direction.Right;
 
-                        // If the player can hunt you down and kill you, you should really try and go the other way
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
+                            // If the player can hunt you down and kill you, you should really try and go the other way
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
 
-                        // Various statements trying to auto-correct the ghosts movement in case he runs into a wall or a dead end
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            // Various statements trying to auto-correct the ghosts movement in case he runs into a wall or a dead end
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Up;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        // Same exact code, except for the other direction
+                        else
                         {
                             direction = Direction.Up;
 
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Right;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
                     }
-                    
-                    // Same exact code, except for the other direction
-                    else
+
+                    else if (ghostCoords.X <= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
                     {
-                        direction = Direction.Up;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (xDelta > yDelta)
                         {
                             direction = Direction.Right;
 
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Down;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
-                    }
-                }
 
-                else if (ghostCoords.X <= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
-                    {
-                        direction = Direction.Right;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        else
                         {
                             direction = Direction.Down;
 
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Right;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
                     }
 
-                    else
+                    else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
                     {
-                        direction = Direction.Down;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Right;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-                }
-
-                else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
-                    {
-                        direction = Direction.Left;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Down;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        direction = Direction.Down;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (xDelta > yDelta)
                         {
                             direction = Direction.Left;
 
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Down;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            direction = Direction.Down;
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Left;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
                     }
-                }
 
-                else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
+                    else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                     {
-                        direction = Direction.Left;
+                        if (xDelta > yDelta)
+                        {
+                            direction = Direction.Left;
 
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Up;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        else
                         {
                             direction = Direction.Up;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
+                            if (player.GodMode)
                                 direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        direction = Direction.Up;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Left;
 
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Left;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
                     }
                 }
+
+                #endregion
+            }
+            else
+            {
+                // If the blue is the only one in jail, leave.
+                if (this.leaveJail && (this.greenGhost == null || !this.greenGhost.InJail) && (this.yellowGhost == null || !this.yellowGhost.InJail))
+                {
+                    if (!CanGhostMove(this.tileMap, ghostCoords, Direction.Up, out motion, out targetTile))
+                    {
+                        if (CanGhostMove(this.tileMap, ghostCoords, Direction.Right, out motion, out targetTile))
+                            direction = Direction.Right;
+                    }
+                    else
+                    {
+                        direction = Direction.Up;
+                        this.leaveJail = false;
+                        this.blueGhost.InJail = false;
+                    }
+                }
+                else return Direction.None;
             }
 
-            #endregion
 
             return direction;
         }
@@ -965,228 +1016,245 @@ namespace PacManLib
             Direction direction = ghost.Direction;
             motion = ghost.Motion;
             Tile targetTile = null;
-
-            #region Ghost pathfinding for red behaviour
-
-            if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
+            
+            if (!this.greenGhost.InJail)
             {
-                int xDelta = Math.Abs((ghostCoords.X - playerCoords.X));
-                int yDelta = Math.Abs((ghostCoords.Y - playerCoords.Y));
+                #region Ghost pathfinding for red behaviour
 
-                if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
+                if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
                 {
-                    if (xDelta > yDelta)
+                    int xDelta = Math.Abs((ghostCoords.X - playerCoords.X));
+                    int yDelta = Math.Abs((ghostCoords.Y - playerCoords.Y));
+
+                    if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                     {
-                        direction = Direction.Right;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Up;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        direction = Direction.Up;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (xDelta > yDelta)
                         {
                             direction = Direction.Right;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
+                            if (player.GodMode)
                                 direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-                }
-
-                else if (ghostCoords.X <= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
-                    {
-                        direction = Direction.Right;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Down;
 
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Up;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
-                    }
 
-                    else
-                    {
-                        direction = Direction.Down;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Right;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-                }
-
-                else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
-                    {
-                        direction = Direction.Left;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Down;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        direction = Direction.Down;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Left;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-                }
-
-                else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
-                    {
-                        direction = Direction.Left;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        else
                         {
                             direction = Direction.Up;
 
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Right;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
                     }
 
-                    else
+                    else if (ghostCoords.X <= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
                     {
-                        direction = Direction.Up;
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (xDelta > yDelta)
                         {
-                            direction = Direction.Left;
+                            direction = Direction.Right;
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
 
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Down;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            direction = Direction.Down;
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Right;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+                    else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
+                    {
+                        if (xDelta > yDelta)
+                        {
+                            direction = Direction.Left;
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Down;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            direction = Direction.Down;
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Left;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+                    else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
+                    {
+                        if (xDelta > yDelta)
+                        {
+                            direction = Direction.Left;
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Up;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            direction = Direction.Up;
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Left;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
                     }
                 }
+
+                #endregion
             }
-
-            #endregion
+            else
+            {
+                // If the blue is the only one in jail, leave.
+                if (this.leaveJail && (this.greenGhost == null || this.blueGhost.InJail) && (this.yellowGhost == null || this.yellowGhost.InJail))
+                {
+                    if (CanGhostMove(this.tileMap, ghostCoords, Direction.Up, out motion, out targetTile))
+                    {
+                        direction = Direction.Up;
+                        this.leaveJail = false;
+                        this.greenGhost.InJail = false;
+                    }
+                }
+                else return Direction.None;
+            }
 
             return direction;
         }
@@ -1207,275 +1275,298 @@ namespace PacManLib
             motion = ghost.Motion;
             Tile targetTile = null;
 
-            #region Ghost pathfinding for orange behaviour
-
-            int randomNumber = rand.Next(0, 1);
-
-            if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
+            if (!this.yellowGhost.InJail)
             {
-                Point predictedCoords;
-                predictedCoords.X = playerCoords.X;
-                predictedCoords.Y = playerCoords.Y;
+                #region Ghost pathfinding for orange behaviour
 
-                // based on direction tries to estimate in front of the player by one tile to try and get slightly more accurate and predicting
-                if (player.Direction == Direction.Right)
-                    predictedCoords.X = playerCoords.X + PacManSX.PathTarget;
-                else if (player.Direction == Direction.Left)
-                    predictedCoords.X = playerCoords.X - PacManSX.PathTarget;
-                else if (player.Direction == Direction.Up)
-                    predictedCoords.Y = playerCoords.Y + PacManSX.PathTarget;
-                else if (player.Direction == Direction.Down)
-                    predictedCoords.Y = playerCoords.Y - PacManSX.PathTarget;
+                int randomNumber = rand.Next(0, 1);
 
-                int whichPathFinding = rand.Next(0, 1);
-
-                // calculates which path is closer purely based on distance between x and y of the player and ghost. Flips between them randomly
-                int xDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.X - predictedCoords.X)) : Math.Abs((ghostCoords.X - playerCoords.X));
-                int yDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.Y - predictedCoords.Y)) : Math.Abs((ghostCoords.Y - playerCoords.Y));
-
-                if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
+                if (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn)
                 {
-                    if (xDelta > yDelta)
+                    Point predictedCoords;
+                    predictedCoords.X = playerCoords.X;
+                    predictedCoords.Y = playerCoords.Y;
+
+                    // based on direction tries to estimate in front of the player by one tile to try and get slightly more accurate and predicting
+                    if (player.Direction == Direction.Right)
+                        predictedCoords.X = playerCoords.X + PacManSX.PathTarget;
+                    else if (player.Direction == Direction.Left)
+                        predictedCoords.X = playerCoords.X - PacManSX.PathTarget;
+                    else if (player.Direction == Direction.Up)
+                        predictedCoords.Y = playerCoords.Y + PacManSX.PathTarget;
+                    else if (player.Direction == Direction.Down)
+                        predictedCoords.Y = playerCoords.Y - PacManSX.PathTarget;
+
+                    int whichPathFinding = rand.Next(0, 1);
+
+                    // calculates which path is closer purely based on distance between x and y of the player and ghost. Flips between them randomly
+                    int xDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.X - predictedCoords.X)) : Math.Abs((ghostCoords.X - playerCoords.X));
+                    int yDelta = (whichPathFinding == 0) ? Math.Abs((ghostCoords.Y - predictedCoords.Y)) : Math.Abs((ghostCoords.Y - playerCoords.Y));
+
+                    if (ghostCoords.X <= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
                     {
-                        direction = Direction.Right;
-
-                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Up;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        direction = Direction.Up;
-
-                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (xDelta > yDelta)
                         {
                             direction = Direction.Right;
 
+                            // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                            direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Up;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            direction = Direction.Up;
+
+                            // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                            direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Right;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
                     }
-                }
 
-                else if (ghostCoords.X <= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
+                    else if (ghostCoords.X <= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
                     {
-                        direction = Direction.Right;
+                        if (xDelta > yDelta)
+                        {
+                            direction = Direction.Right;
 
-                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
+                            // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                            direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Down;
+
+                                // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                                direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+                        else
                         {
                             direction = Direction.Down;
 
                             // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                             direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
+                            if (player.GodMode)
                                 direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-                    else
-                    {
-                        direction = Direction.Down;
-
-                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Right;
 
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Right;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
                                 }
-
-                            }
-                        }
-                    }
-                }
-
-                else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
-                    {
-                        direction = Direction.Left;
-
-                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Down;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
                             }
                         }
                     }
 
-                    else
+                    else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y <= playerCoords.Y)
                     {
-                        direction = Direction.Down;
-
-                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Left;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-                }
-
-                else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
-                {
-                    if (xDelta > yDelta)
-                    {
-                        direction = Direction.Left;
-
-                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                        {
-                            direction = Direction.Up;
-
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                            {
-                                direction = reverseMovement(direction);
-
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
-                                {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
-
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        direction = Direction.Up;
-
-                        // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
-                        direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
-
-                        if (player.GodMode)
-                            direction = reverseMovement(direction);
-
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (xDelta > yDelta)
                         {
                             direction = Direction.Left;
 
                             // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                             direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
                             if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                             {
-                                direction = reverseMovement(direction);
+                                direction = Direction.Down;
 
                                 if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
                                 {
-                                    direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
-                                }
+                                    direction = reverseMovement(direction);
 
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            direction = Direction.Down;
+
+                            // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                            direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Left;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+                    else if (ghostCoords.X >= playerCoords.X && ghostCoords.Y >= playerCoords.Y)
+                    {
+                        if (xDelta > yDelta)
+                        {
+                            direction = Direction.Left;
+
+                            // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                            direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Up;
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            direction = Direction.Up;
+
+                            // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                            direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
+
+                            if (player.GodMode)
+                                direction = reverseMovement(direction);
+
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            {
+                                direction = Direction.Left;
+
+                                // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
+                                direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
+
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                {
+                                    direction = reverseMovement(direction);
+
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    {
+                                        direction = reverseMovement(blueGhost.Direction);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    }
+
+                                }
                             }
                         }
                     }
                 }
+
+                #endregion
             }
-
-            #endregion
+            else
+            {
+                // If the blue is still in jail or null and green is not in jail then leave.
+                if (this.leaveJail && (this.blueGhost == null || this.blueGhost.InJail) && (this.greenGhost == null || !this.greenGhost.InJail))
+                {
+                    if (!CanGhostMove(this.tileMap, ghostCoords, Direction.Up, out motion, out targetTile))
+                    {
+                        if (CanGhostMove(this.tileMap, ghostCoords, Direction.Left, out motion, out targetTile))
+                            direction = Direction.Left;
+                    }
+                    else
+                    {
+                        direction = Direction.Up;
+                        this.leaveJail = false;
+                        this.yellowGhost.InJail = false;
+                    }
+                }
+                else
+                    return Direction.None;
+            }
 
             return direction;
         }
