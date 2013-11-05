@@ -49,6 +49,9 @@ namespace PacManLib
 
         public const int PathTarget = 4;
 
+        public const int GameCountdownInSeconds = 3;
+        public const int FirstRoundGameCountdownInSeconds = 6;
+
         public const int LeaveJailInSeconds = 1;
         public const int GhostRespawnInSeconds = 5;
         public const int FruitDespawnInSeconds = 30;
@@ -80,7 +83,7 @@ namespace PacManLib
         private bool gameStarted = false;
         
         private int fruitSpawnTime = -1;
-        private int gameCountdown = 3;
+        private int gameCountdown = PacManSX.FirstRoundGameCountdownInSeconds;
         private int dotsAndRingsLeft = 0;
         private int lives = 3;
         private int score = 0;
@@ -667,7 +670,7 @@ namespace PacManLib
                 this.godmodeInstance.Stop();
 
             // Start the game countdown.
-            this.gameCountdown = 3;
+            this.gameCountdown = PacManSX.GameCountdownInSeconds;
             this.gameStarted = false;
             this.leaveJailTimer = 0;
             this.leaveJail = false;

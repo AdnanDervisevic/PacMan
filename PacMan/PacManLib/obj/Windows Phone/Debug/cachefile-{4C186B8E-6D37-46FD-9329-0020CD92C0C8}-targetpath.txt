@@ -10,8 +10,8 @@ Content\Tiles\Door.xnb
 Content\Tiles\Fruits.xnb
 Content\Tiles\Tileset.xnb
 Content\Ghosts\AmmoGhost.xnb
+Content\Ghosts\GodMode.xnb
 Content\Font.xnb
 Content\Sounds\chomp.xnb
 Content\Sounds\coin.xnb
 Content\Sounds\god_mode.xnb
-Content\Ghosts\GodMode.xnb

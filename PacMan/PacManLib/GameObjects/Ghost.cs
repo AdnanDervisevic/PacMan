@@ -21,7 +21,6 @@ namespace PacManLib.GameObjects
 
         private Vector2 SpawnPosition;
         private float respawnTimer = 0;
-        private Point previousGhostCoords;
 
         #endregion
 

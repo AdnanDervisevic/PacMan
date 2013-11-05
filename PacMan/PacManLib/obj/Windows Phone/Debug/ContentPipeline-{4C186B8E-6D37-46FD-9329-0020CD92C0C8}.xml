@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\YellowGhost.xnb</Output>
-      <Time>2013-11-05T21:28:17.0495167+01:00</Time>
+      <Time>2013-11-05T21:54:01.5525531+01:00</Time>
     </Item>
     <Item>
       <Source>Tiles\Door.png</Source>
@@ -107,7 +107,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\AmmoGhost.xnb</Output>
-      <Time>2013-11-04T16:50:53.4558445+01:00</Time>
+      <Time>2013-11-05T21:57:52.223241+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\GodMode.png</Source>
+      <Name>Ghosts\GodMode</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GodMode.xnb</Output>
+      <Time>2013-11-05T21:33:46.2547296+01:00</Time>
     </Item>
     <Item>
       <Source>Font.spritefont</Source>
@@ -144,15 +153,6 @@
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\god_mode.xnb</Output>
       <Time>2013-10-28T15:23:38.9029306+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Ghosts\GodMode.png</Source>
-      <Name>Ghosts\GodMode</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GodMode.xnb</Output>
-      <Time>2013-11-05T21:33:46.2547296+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
