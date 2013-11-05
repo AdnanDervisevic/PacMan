@@ -50,7 +50,7 @@
             	<Run Text="There are "/>
             	<Run Text="wooden"/>
             	<Run Text=" and "/>
-            	<Run Text="iron "/>
+            	<Run Text="ghost "/>
             	<Run Text="crates blocking some"/>
             	<LineBreak/>
             	<Run Text="paths. These can  be shot with Normal and"/>
@@ -62,12 +62,12 @@
             	<LineBreak/>
             	<Run/>
             	<LineBreak/>
-            	<Run Text="You shoot by double tapping, left side of th"/>
+            	<Run Text="You shoot by double tapping, right side of th"/>
             	<Run Text="e"/>
             	<LineBreak/>
             	<Run Text="screen for normal"/>
             	<LineBreak/>
-            	<Run Text="bullets and the right for ghost bullets."/>
+            	<Run Text="bullets and the left for ghost bullets."/>
             	<LineBreak/>
             	<Run/>
             	<LineBreak/>
@@ -75,7 +75,7 @@
             	<LineBreak/>
             	<Run/>
             	<LineBreak/>
-            	<Run Text="To move just use the gyroscope. Have fun!"/>
+            	<Run Text="To move just tilt the phone. Have fun!"/>
             </TextBlock>
         </Grid>
     </Grid>

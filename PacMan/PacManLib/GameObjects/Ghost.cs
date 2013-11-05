@@ -117,7 +117,7 @@ namespace PacManLib.GameObjects
                 if (ghostTilePosition == this.Position)
                 {
                     // Run the ghost AI.
-                    if (this.GhostAI != null)
+                    if (this.GhostAI != null && (ghostTile.TileContent == TileContent.Turn || ghostTile.TileContent == TileContent.RingTurn || ghostTile.TileContent == TileContent.DotTurn))
                     {
                         direction = this.GhostAI(this, ghostTile, ghostCoords, playerCoords, out motion);
                     }

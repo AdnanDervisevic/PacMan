@@ -25,7 +25,7 @@ namespace PacManLib.Map
         VerticalTopStop = 9,
         VerticalBottomStop = 10,
         WoodBarrier = 11,
-        IronBarrier = 12,
+        ghostBarrier = 12,
         Ring = 13,
         Dot = 14,
         RingTurn = 15,

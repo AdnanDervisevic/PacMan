@@ -71,7 +71,7 @@ namespace PacManLib
         private float lastY = 0;
 #endif
 
-        private bool ironBullet = false;
+        private bool ghostBullet = false;
         private bool fruitSpawned = false;
         private bool bulletAlive = false;
         private bool gameOver = false;
@@ -82,7 +82,7 @@ namespace PacManLib
         private int dotsAndRingsLeft = 0;
         private int lives = 3;
         private int score = 0;
-        private int ironBullets = 0;
+        private int ghostBullets = 0;
         private int bulletsFired = 0;
 
         private float fruitSpawnTimer = 0;
@@ -370,7 +370,7 @@ namespace PacManLib
                     Tile bulletTile = this.tileMap.GetTile(bulletCoords);
 
                     // Check if the bullet tile is colliding with a wall or a type of barrier.
-                    if (bulletTile.TileContent > TileContent.Path && bulletTile.TileContent < TileContent.WoodBarrier || !this.ironBullet && bulletTile.TileContent == TileContent.IronBarrier)
+                    if (bulletTile.TileContent > TileContent.Path && bulletTile.TileContent < TileContent.WoodBarrier || !this.ghostBullet && bulletTile.TileContent == TileContent.ghostBarrier)
                         this.bulletAlive = false;
                     else if (bulletTile.TileContent == TileContent.WoodBarrier)
                     {
@@ -378,9 +378,9 @@ namespace PacManLib
                         this.bulletAlive = false;
                         this.tileMap.UpdateTile(bulletCoords, TileContent.Path);
                     }
-                    else if (bulletTile.TileContent == TileContent.IronBarrier && this.ironBullet)
+                    else if (bulletTile.TileContent == TileContent.ghostBarrier && this.ghostBullet)
                     {
-                        // Destroy the iron barrier if the bullet hits it and it's a iron bullet.
+                        // Destroy the ghost barrier if the bullet hits it and it's a ghost bullet.
                         this.bulletAlive = false;
                         this.tileMap.UpdateTile(bulletCoords, TileContent.Path);
                     }
@@ -485,8 +485,8 @@ namespace PacManLib
                 this.GameManager.SpriteBatch.Draw(this.lifeTexture, new Vector2(GameManager.ScreenWidth - lives * 20 - 4, 4) + new Vector2(20 * i, 0), Color.White);
             this.GameManager.SpriteBatch.DrawString(this.font, "Score: " + this.score, this.scorePosition, Color.White);
 
-            this.GameManager.SpriteBatch.DrawString(this.font, "Iron Bullets: " + this.ironBullets + "x", new Vector2(this.GameManager.ScreenWidth - 400, 0), Color.White);
-            this.GameManager.SpriteBatch.Draw(this.ghostBulletTexture, new Vector2(this.GameManager.ScreenWidth - 225, 2), Color.White);
+            this.GameManager.SpriteBatch.DrawString(this.font, "Ghost Bullets: " + this.ghostBullets + "x", new Vector2(this.GameManager.ScreenWidth - 400, 0), Color.White);
+            this.GameManager.SpriteBatch.Draw(this.ghostBulletTexture, new Vector2(this.GameManager.ScreenWidth - 210, 2), Color.White);
 
             this.GameManager.SpriteBatch.End();
             
@@ -547,37 +547,37 @@ namespace PacManLib
             {
                 this.tileMap.LoadMap(level, new int[,]
                 {
-                    { 5, 1, 8, 0, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6 },
-                    { 2, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 2 },
-                    { 2, 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 0, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 8, 18, 7, 1, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 10, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 10 },
-                    { 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 5, 1, 1, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0 },
-                    { 9, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 9 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 1, 1, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2 },
-                    { 2, 0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 0, 2 },
-                    { 2, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 2 },
-                    { 3, 1, 8, 0, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 }
+                    { 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 5, 1, 1, 1, 1, 1, 1, 1, 6, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 17, 0, 0, 17, 0, 0, 17, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 0, 5, 8, 18, 7, 6, 0, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 0, 2, 0, 0, 0, 2, 0, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 10, 0, 3, 1, 1, 1, 4, 0, 10, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 },
                 });
 
-                this.tileMap.UpdateTile(new Point(14, 17), SpawnPoint.Fruit);
-                this.tileMap.UpdateTile(new Point(1, 1), SpawnPoint.Player);
-                this.tileMap.UpdateTile(new Point(21, 1), SpawnPoint.BlueGhost);
-                this.tileMap.UpdateTile(new Point(23, 1), SpawnPoint.GreenGhost);
-                this.tileMap.UpdateTile(new Point(25, 1), SpawnPoint.YellowGhost);
-                this.tileMap.UpdateTile(new Point(27, 1), SpawnPoint.PurpleGhost);
+                this.tileMap.UpdateTile(new Point(24, 3), SpawnPoint.Player);
+                this.tileMap.UpdateTile(new Point(16, 9), SpawnPoint.BlueGhost);
+                this.tileMap.UpdateTile(new Point(17, 9), SpawnPoint.GreenGhost);
+                this.tileMap.UpdateTile(new Point(18, 9), SpawnPoint.YellowGhost);
+                this.tileMap.UpdateTile(new Point(17, 7), SpawnPoint.PurpleGhost);
+                this.tileMap.UpdateTile(new Point(-1, -1), SpawnPoint.Fruit);
             }
 
             this.dotsAndRingsLeft = this.tileMap.DotsAndRings();
@@ -1983,7 +1983,7 @@ namespace PacManLib
                     this.bulletPosition = this.player.Center + new Vector2(7, -8);
 
                 this.bulletAlive = true;
-                this.ironBullet = false;
+                this.ghostBullet = false;
                 this.bulletsFired++;
                 this.score -= this.bulletsFired * PacManSX.StartBulletCost;
             }
@@ -1995,7 +1995,7 @@ namespace PacManLib
         private void TwoFingerFire()
         {
             // Only one bullet can be alive and you need atleast BulletCost in score..
-            if (!this.bulletAlive && this.ironBullets > 0 && this.score >= PacManSX.GhostScore)
+            if (!this.bulletAlive && this.ghostBullets > 0 && this.score >= PacManSX.GhostScore)
             {
                 this.bulletMotion = this.player.Motion;
 
@@ -2010,8 +2010,8 @@ namespace PacManLib
                     this.bulletPosition = this.player.Center + new Vector2(7, -8);
 
                 this.bulletAlive = true;
-                this.ironBullet = true;
-                this.ironBullets--;
+                this.ghostBullet = true;
+                this.ghostBullets--;
                 this.score -= PacManSX.GhostScore;
             }
         }
@@ -2110,25 +2110,25 @@ namespace PacManLib
                 {
                     this.blueGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
-                    this.ironBullets++;
+                    this.ghostBullets++;
                 }
                 else if (this.greenGhost != null && this.greenGhost.Alive && this.greenGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.greenGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
-                    this.ironBullets++;
+                    this.ghostBullets++;
                 }
                 else if (this.yellowGhost != null && this.yellowGhost.Alive && this.yellowGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.yellowGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
-                    this.ironBullets++;
+                    this.ghostBullets++;
                 }
                 else if (this.purpleGhost != null && this.purpleGhost.Alive && this.purpleGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.purpleGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
-                    this.ironBullets++;
+                    this.ghostBullets++;
                 }
             }
             else

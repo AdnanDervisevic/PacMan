@@ -67,3 +67,4 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\PacMan.dll
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\PacMan.pdb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\XapCacheFile.xml
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Ghosts\GodMode.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\Rules.g.cs

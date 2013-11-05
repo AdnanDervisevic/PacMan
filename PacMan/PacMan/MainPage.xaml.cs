@@ -33,11 +33,17 @@ namespace PacMan
         /// <summary>
         /// When the user clicks on the button the game page will load.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void startGameButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/GamePage.xaml", UriKind.Relative));
+        }
+
+        /// <summary>
+        /// When the user clicks on the rules button the rules page will load.
+        /// </summary>
+        private void rulesButtonClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Rules.xaml", UriKind.Relative));
         }
 
         #endregion
