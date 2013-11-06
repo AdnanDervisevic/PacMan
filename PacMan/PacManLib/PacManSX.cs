@@ -178,7 +178,7 @@ namespace PacManLib
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.player = new Player(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
+                this.player = new Player(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Left,
                     this.GameManager.ContentManager.Load<Texture2D>("Pacman"), null, 
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
             }
@@ -567,7 +567,43 @@ namespace PacManLib
         /// </summary>
         private void LoadMap(int level)
         {
-            if (level > 0)
+            if (level == 1)
+            {
+                this.tileMap.LoadMap(level, new int[,]
+                {
+                    { 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 13, 13, 13, 13, 13, 13, 13, 13, 13, 15, 2, 2, 15, 13, 13, 13, 13, 13, 13, 13, 13, 13, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 2, 13, 5, 1, 1, 1, 1, 6, 13, 5, 1, 1, 1, 1, 1, 1, 1, 6, 15, 2, 2, 13, 5, 1, 1, 1, 1, 1, 1, 1, 6, 13, 5, 1, 1, 1, 1, 6, 13, 2 },
+                    { 2, 13, 3, 1, 1, 1, 1, 4, 13, 3, 1, 1, 1, 1, 1, 1, 1, 4, 13, 3, 4, 13, 3, 1, 1, 1, 1, 1, 1, 1, 4, 13, 3, 1, 1, 1, 1, 4, 13, 2 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 15, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 15, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 2, 14, 7, 1, 1, 1, 1, 8, 13, 5, 6, 13, 9, 13, 7, 1, 1, 1, 1, 6, 5, 1, 1, 1, 1, 8, 13, 9, 13, 5, 6, 13, 7, 1, 1, 1, 1, 8, 14, 2 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 2, 2, 13, 2, 15, 13, 13, 13, 13, 15, 2, 2, 15, 13, 13, 13, 13, 15, 2, 13, 2, 2, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 3, 1, 1, 1, 1, 1, 1, 6, 13, 2, 2, 13, 3, 1, 1, 1, 1, 8, 0, 3, 4, 0, 7, 1, 1, 1, 1, 4, 13, 2, 2, 13, 5, 1, 1, 1, 1, 1, 1, 4 },
+                    { 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 15, 13, 13, 13, 13, 13, 15, 17, 0, 17, 17, 0, 15, 13, 13, 13, 13, 15, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0 },
+                    { 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 13, 5, 1, 1, 1, 6, 13, 5, 8, 18, 7, 6, 13, 5, 1, 1, 6, 13, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0 },
+                    { 7, 1, 1, 1, 1, 1, 1, 4, 13, 3, 4, 13, 2, 0, 0, 0, 2, 13, 2, 17, 17, 17, 2, 13, 2, 0, 0, 2, 13, 3, 4, 13, 3, 1, 1, 1, 1, 1, 1, 8 },
+                    { 0, 0, 0, 0, 0, 0, 0, 0, 15, 13, 13, 15, 3, 1, 1, 1, 4, 13, 3, 1, 1, 1, 4, 13, 3, 1, 1, 4, 15, 13, 13, 15, 0, 0, 0, 0, 0, 0, 0, 0 },
+                    { 7, 1, 1, 1, 1, 1, 1, 6, 13, 5, 6, 15, 0, 0, 0, 0, 0, 17, 11, 17, 0, 17, 11, 17, 0, 0, 0, 0, 15, 5, 6, 13, 5, 1, 1, 1, 1, 1, 1, 8 },
+                    { 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 13, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 13, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0 },
+                    { 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0 },
+                    { 5, 1, 1, 1, 1, 1, 1, 4, 13, 3, 4, 13, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 13, 3, 4, 13, 3, 1, 1, 1, 1, 1, 1, 6 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 17, 0, 0, 17, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 2, 13, 5, 1, 1, 1, 1, 6, 13, 5, 6, 13, 5, 1, 1, 1, 1, 6, 13, 5, 6, 13, 5, 1, 1, 1, 1, 6, 13, 5, 6, 13, 5, 1, 1, 1, 1, 6, 13, 2 },
+                    { 2, 14, 3, 1, 1, 1, 1, 4, 13, 2, 2, 13, 3, 1, 1, 1, 1, 4, 13, 3, 4, 13, 3, 1, 1, 1, 1, 4, 13, 2, 2, 13, 3, 1, 1, 1, 1, 4, 14, 2 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 2, 2, 15, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 15, 2, 2, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 2, 13, 7, 1, 1, 1, 1, 1, 1, 4, 3, 1, 1, 1, 1, 1, 1, 8, 13, 7, 8, 13, 7, 1, 1, 1, 1, 1, 1, 4, 3, 1, 1, 1, 1, 1, 1, 8, 13, 2 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 },
+                });
+
+                this.tileMap.UpdateTile(new Point(20, 16), SpawnPoint.Player);
+                this.tileMap.UpdateTile(new Point(19, 10), SpawnPoint.BlueGhost);
+                this.tileMap.UpdateTile(new Point(20, 10), SpawnPoint.GreenGhost);
+                this.tileMap.UpdateTile(new Point(21, 10), SpawnPoint.YellowGhost);
+                this.tileMap.UpdateTile(new Point(20, 8), SpawnPoint.PurpleGhost);
+                this.tileMap.UpdateTile(new Point(20, 12), SpawnPoint.Fruit);
+            }
+            else if (level > 1)
             {
                 this.tileMap.LoadMap(level, new int[,]
                 {
@@ -729,11 +765,11 @@ namespace PacManLib
         /// <param name="motion">The motion the ghost should move in.</param>
         /// <returns>Returns the direction the ghost should move in.</returns>
         /// Blue matches cyan AI
-        private Direction blueGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion)
+        private Direction blueGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion, out Tile targetTile)
         {
             Direction direction = ghost.Direction;
             motion = ghost.Motion;
-            Tile targetTile = null;
+            targetTile = null;
 
             if (!this.blueGhost.InJail)
             {
@@ -773,18 +809,18 @@ namespace PacManLib
                                 direction = reverseMovement(direction);
 
                             // Various statements trying to auto-correct the ghosts movement in case he runs into a wall or a dead end
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Up;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -799,18 +835,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Right;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -827,18 +863,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Down;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -852,18 +888,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Right;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -880,18 +916,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Down;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -905,18 +941,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Left;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -933,18 +969,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Up;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -958,18 +994,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Left;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -985,9 +1021,9 @@ namespace PacManLib
                 // If the blue is the only one in jail, leave.
                 if (this.leaveJail && (this.greenGhost == null || !this.greenGhost.InJail) && (this.yellowGhost == null || !this.yellowGhost.InJail))
                 {
-                    if (!CanGhostMove(this.tileMap, ghostCoords, Direction.Up, out motion, out targetTile))
+                    if (!CanGhostMove(this.tileMap, ghostCoords, Direction.Up, ghost.InJail, out motion, out targetTile))
                     {
-                        if (CanGhostMove(this.tileMap, ghostCoords, Direction.Right, out motion, out targetTile))
+                        if (CanGhostMove(this.tileMap, ghostCoords, Direction.Right, ghost.InJail, out motion, out targetTile))
                             direction = Direction.Right;
                     }
                     else
@@ -1014,11 +1050,11 @@ namespace PacManLib
         /// <param name="motion">The motion the ghost should move in.</param>
         /// <returns>Returns the direction the ghost should move in.</returns>
         /// Green matches red ai
-        private Direction greenGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion)
+        private Direction greenGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion, out Tile targetTile)
         {
             Direction direction = ghost.Direction;
             motion = ghost.Motion;
-            Tile targetTile = null;
+            targetTile = null;
             
             if (!this.greenGhost.InJail)
             {
@@ -1038,18 +1074,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Up;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1063,18 +1099,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Right;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1091,18 +1127,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Down;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1116,18 +1152,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Right;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1144,18 +1180,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Down;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1169,18 +1205,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Left;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1197,18 +1233,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Up;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1222,18 +1258,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Left;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1249,7 +1285,7 @@ namespace PacManLib
                 // If the blue is the only one in jail, leave.
                 if (this.leaveJail && (this.greenGhost == null || this.blueGhost.InJail) && (this.yellowGhost == null || this.yellowGhost.InJail))
                 {
-                    if (CanGhostMove(this.tileMap, ghostCoords, Direction.Up, out motion, out targetTile))
+                    if (CanGhostMove(this.tileMap, ghostCoords, Direction.Up, ghost.InJail, out motion, out targetTile))
                     {
                         direction = Direction.Up;
                         this.leaveJail = false;
@@ -1272,11 +1308,11 @@ namespace PacManLib
         /// <param name="motion">The motion the ghost should move in.</param>
         /// <returns>Returns the direction the ghost should move in.</returns>
         /// Yellow matches orange AI. Orange always was a bit slow...
-        private Direction yellowGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion)
+        private Direction yellowGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion, out Tile targetTile)
         {
             Direction direction = ghost.Direction;
             motion = ghost.Motion;
-            Tile targetTile = null;
+            targetTile = null;
 
             if (!this.yellowGhost.InJail)
             {
@@ -1318,18 +1354,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Up;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1346,18 +1382,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Right;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1377,21 +1413,21 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Down;
 
                                 // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                                 direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1407,18 +1443,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Right;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1438,18 +1474,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Down;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1466,18 +1502,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Left;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1497,18 +1533,18 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Up;
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1525,21 +1561,21 @@ namespace PacManLib
                             if (player.GodMode)
                                 direction = reverseMovement(direction);
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = Direction.Left;
 
                                 // He has a 50% chance of actually getting the direction right. Orange wasn't brightest ghost of the lot, but he tried so very hard!
                                 direction = (randomNumber % 1 == 0) ? direction : reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(direction);
 
-                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                    if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                     {
                                         direction = reverseMovement(blueGhost.Direction);
-                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                        PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                     }
 
                                 }
@@ -1555,9 +1591,9 @@ namespace PacManLib
                 // If the blue is still in jail or null and green is not in jail then leave.
                 if (this.leaveJail && (this.blueGhost == null || this.blueGhost.InJail) && (this.greenGhost == null || !this.greenGhost.InJail))
                 {
-                    if (!CanGhostMove(this.tileMap, ghostCoords, Direction.Up, out motion, out targetTile))
+                    if (!CanGhostMove(this.tileMap, ghostCoords, Direction.Up, ghost.InJail, out motion, out targetTile))
                     {
-                        if (CanGhostMove(this.tileMap, ghostCoords, Direction.Left, out motion, out targetTile))
+                        if (CanGhostMove(this.tileMap, ghostCoords, Direction.Left, ghost.InJail, out motion, out targetTile))
                             direction = Direction.Left;
                     }
                     else
@@ -1584,11 +1620,11 @@ namespace PacManLib
         /// <param name="motion">The motion the ghost should move in.</param>
         /// <returns>Returns the direction the ghost should move in.</returns>
         /// Purple ghost matches "pink" pac-man ai
-        private Direction purpleGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion)
+        private Direction purpleGhostAI(Ghost ghost, Tile ghostTile, Point ghostCoords, Point playerCoords, out Vector2 motion, out Tile targetTile)
         {
             Direction direction = ghost.Direction;
             motion = ghost.Motion;
-            Tile targetTile = null;
+            targetTile = null;
 
             #region Ghost pathfinding for pink behaviour
 
@@ -1623,18 +1659,18 @@ namespace PacManLib
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                         {
                             direction = Direction.Up;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                 }
 
                             }
@@ -1648,18 +1684,18 @@ namespace PacManLib
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                         {
                             direction = Direction.Right;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                 }
 
                             }
@@ -1676,18 +1712,18 @@ namespace PacManLib
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                         {
                             direction = Direction.Down;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                 }
 
                             }
@@ -1701,18 +1737,18 @@ namespace PacManLib
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                         {
                             direction = Direction.Right;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                 }
 
                             }
@@ -1729,18 +1765,18 @@ namespace PacManLib
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                         {
                             direction = Direction.Down;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                 }
 
                             }
@@ -1754,18 +1790,18 @@ namespace PacManLib
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                         {
                             direction = Direction.Left;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                 }
 
                             }
@@ -1782,18 +1818,18 @@ namespace PacManLib
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                         {
                             direction = Direction.Up;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                 }
 
                             }
@@ -1807,18 +1843,18 @@ namespace PacManLib
                         if (player.GodMode)
                             direction = reverseMovement(direction);
 
-                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                        if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                         {
                             direction = Direction.Left;
 
-                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                            if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                             {
                                 direction = reverseMovement(direction);
 
-                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile))
+                                if (!PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile))
                                 {
                                     direction = reverseMovement(blueGhost.Direction);
-                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, out motion, out targetTile);
+                                    PacManSX.CanGhostMove(this.tileMap, ghostCoords, direction, ghost.InJail, out motion, out targetTile);
                                 }
 
                             }
@@ -2259,7 +2295,7 @@ namespace PacManLib
         /// <param name="direction">The direction to be checked.</param>
         /// <param name="motion">If the player couldn't move then it's set to (0, 0); otherwise it's set to the direction.</param>
         /// <returns>True if the player can move in that direction; otherwise false.</returns>
-        public static bool CanGhostMove(TileMap tileMap, Point coords, Direction direction, out Vector2 motion, out Tile targetTile)
+        public static bool CanGhostMove(TileMap tileMap, Point coords, Direction direction, bool inJail, out Vector2 motion, out Tile targetTile)
         {
             motion = Vector2.Zero;
             targetTile = null;
@@ -2310,7 +2346,7 @@ namespace PacManLib
             // If the player can move then return true.
             if (targetTile.TileContent == TileContent.Path || targetTile.TileContent == TileContent.Turn
                 || targetTile.TileContent >= TileContent.Ring && targetTile.TileContent <= TileContent.DotTurn
-                || targetTile.TileContent == TileContent.Door)
+                || (targetTile.TileContent == TileContent.Door && inJail))
                 return true;
 
             // else set motion to (0, 0) and return false.
