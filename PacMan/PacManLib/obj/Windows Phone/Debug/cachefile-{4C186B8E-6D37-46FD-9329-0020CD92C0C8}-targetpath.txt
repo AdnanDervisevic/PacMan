@@ -15,3 +15,4 @@ Content\Font.xnb
 Content\Sounds\chomp.xnb
 Content\Sounds\coin.xnb
 Content\Sounds\god_mode.xnb
+Content\GhostBullet.xnb

@@ -21,6 +21,7 @@ namespace PacManLib.GameObjects
 
         private Vector2 SpawnPosition;
         private float respawnTimer = 0;
+        private bool startInJail = false;
 
         #endregion
 
@@ -59,10 +60,12 @@ namespace PacManLib.GameObjects
         /// <param name="texture">The players spritesheet.</param>
         /// <param name="frameWidth">The width of a single frame.</param>
         /// <param name="frameHeight">The height of a single frame.</param>
-        public Ghost(GameManager gameManager, Vector2 position, Direction startDirection, Texture2D texture, Texture2D godModeTexture, int frameWidth, int frameHeight)
+        public Ghost(GameManager gameManager, Vector2 position, Direction startDirection, bool startInJail, Texture2D texture, Texture2D godModeTexture, int frameWidth, int frameHeight)
             : base(gameManager, position, startDirection, texture, godModeTexture, frameWidth, frameHeight)
         {
             this.SpawnPosition = position;
+            this.startInJail = startInJail;
+            this.InJail = startInJail;
             this.Speed = 120;
         }
 
@@ -86,6 +89,7 @@ namespace PacManLib.GameObjects
                     this.Alive = true;
                     this.Position = this.SpawnPosition;
                     this.respawnTimer = 0;
+                    this.InJail = this.startInJail;
                 }
             }
 

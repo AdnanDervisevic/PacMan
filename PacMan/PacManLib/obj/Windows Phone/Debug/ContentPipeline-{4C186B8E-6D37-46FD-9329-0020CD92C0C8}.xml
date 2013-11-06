@@ -154,6 +154,15 @@
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\god_mode.xnb</Output>
       <Time>2013-10-28T15:23:38.9029306+01:00</Time>
     </Item>
+    <Item>
+      <Source>GhostBullet.png</Source>
+      <Name>GhostBullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\GhostBullet.xnb</Output>
+      <Time>2013-11-06T21:57:15+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{4C186B8E-6D37-46FD-9329-0020CD92C0C8}</ContentProjectGUID>

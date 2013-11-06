@@ -116,9 +116,10 @@ namespace PacManLib
         private Vector2 bulletMotion;
 
         private Texture2D bulletTexture;
+        private Texture2D ghostBulletTexture;
         private Texture2D BlackTexture;
         private Texture2D lifeTexture;
-        private Texture2D ghostBulletTexture;
+        private Texture2D ghostBulletIconTexture;
 
         private SoundEffectInstance godmodeInstance;
         private SoundEffectInstance chompInstance;
@@ -153,11 +154,12 @@ namespace PacManLib
             this.rand = new Random();
 
             this.bulletTexture = this.GameManager.ContentManager.Load<Texture2D>("Bullet");
+            this.ghostBulletTexture = this.GameManager.ContentManager.Load<Texture2D>("GhostBullet");
             this.lifeTexture = this.GameManager.ContentManager.Load<Texture2D>("Life");
             this.BlackTexture = this.GameManager.ContentManager.Load<Texture2D>("BlackTexture");
             this.fruitTileset = new Tileset(this.GameManager.ContentManager.Load<Texture2D>("Tiles/Fruits"),
                 PacManSX.TileWidth, PacManSX.TileHeight);
-            this.ghostBulletTexture = this.GameManager.ContentManager.Load<Texture2D>("Ghosts/AmmoGhost");
+            this.ghostBulletIconTexture = this.GameManager.ContentManager.Load<Texture2D>("Ghosts/AmmoGhost");
 
             soundEatScore = gameManager.ContentManager.Load<SoundEffect>("Sounds\\coin");
             soundChomp = gameManager.ContentManager.Load<SoundEffect>("Sounds\\chomp");
@@ -186,41 +188,37 @@ namespace PacManLib
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.blueGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
+                this.blueGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right, true,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/BlueGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"), 
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.blueGhost.GhostAI += blueGhostAI;
-                this.blueGhost.InJail = true;
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.greenGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Up,
+                this.greenGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Up, true,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GreenGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.greenGhost.GhostAI += greenGhostAI;
-                this.greenGhost.InJail = true;
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.yellowGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Left,
+                this.yellowGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Left, true,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/YellowGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.yellowGhost.GhostAI += yellowGhostAI;
-                this.yellowGhost.InJail = true;
             }
             i++;
 
             if (spawnCoords[i].X >= 0 || spawnCoords[i].Y >= 0)
             {
-                this.purpleGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right,
+                this.purpleGhost = new Ghost(this.GameManager, PacManSX.ConvertCellToPosition(spawnCoords[i]), Direction.Right, false,
                     this.GameManager.ContentManager.Load<Texture2D>("Ghosts/PurpleGhost"), this.GameManager.ContentManager.Load<Texture2D>("Ghosts/GodMode"),
                     PacManSX.CharacterWidth, PacManSX.CharacterHeight);
                 this.purpleGhost.GhostAI += purpleGhostAI;
-                this.purpleGhost.InJail = false;
             }
 
 #if WINDOWS_PHONE
@@ -497,7 +495,12 @@ namespace PacManLib
 
             // Draw the bullet
             if (this.bulletAlive)
-                this.GameManager.SpriteBatch.Draw(this.bulletTexture, this.bulletPosition, Color.White);
+            {
+                if (this.ghostBullet)
+                    this.GameManager.SpriteBatch.Draw(this.ghostBulletTexture, this.bulletPosition, Color.White);
+                else
+                    this.GameManager.SpriteBatch.Draw(this.bulletTexture, this.bulletPosition, Color.White);
+            }
 
             // Draw the fruit
             if (this.fruitSpawned)
@@ -510,7 +513,7 @@ namespace PacManLib
             this.GameManager.SpriteBatch.DrawString(this.font, "Score: " + this.score, this.scorePosition, Color.White);
 
             this.GameManager.SpriteBatch.DrawString(this.font, "Ghost Bullets: " + this.ghostBullets + "x", new Vector2(this.GameManager.ScreenWidth - 400, 0), Color.White);
-            this.GameManager.SpriteBatch.Draw(this.ghostBulletTexture, new Vector2(this.GameManager.ScreenWidth - 210, 2), Color.White);
+            this.GameManager.SpriteBatch.Draw(this.ghostBulletIconTexture, new Vector2(this.GameManager.ScreenWidth - 210, 2), Color.White);
 
             this.GameManager.SpriteBatch.End();
             
@@ -1283,7 +1286,7 @@ namespace PacManLib
             else
             {
                 // If the blue is the only one in jail, leave.
-                if (this.leaveJail && (this.greenGhost == null || this.blueGhost.InJail) && (this.yellowGhost == null || this.yellowGhost.InJail))
+                if (this.leaveJail)
                 {
                     if (CanGhostMove(this.tileMap, ghostCoords, Direction.Up, ghost.InJail, out motion, out targetTile))
                     {
@@ -1589,7 +1592,7 @@ namespace PacManLib
             else
             {
                 // If the blue is still in jail or null and green is not in jail then leave.
-                if (this.leaveJail && (this.blueGhost == null || this.blueGhost.InJail) && (this.greenGhost == null || !this.greenGhost.InJail))
+                if (this.leaveJail && (this.greenGhost == null || !this.greenGhost.InJail))
                 {
                     if (!CanGhostMove(this.tileMap, ghostCoords, Direction.Up, ghost.InJail, out motion, out targetTile))
                     {
