@@ -44,10 +44,13 @@ namespace PacManLib
         /// </summary>
         public ContentManager ContentManager { get; private set; }
 
+#if WINDOWS_PHONE
+
         /// <summary>
         /// Gets or sets the display orientation, this should never be set manually.
         /// </summary>
         public DisplayOrientation Orientation { get; set; }
+#endif
 
         /// <summary>
         /// Gets the height of the screen in pixels.

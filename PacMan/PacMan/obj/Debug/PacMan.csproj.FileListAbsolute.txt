@@ -113,3 +113,4 @@ X:\PacManSX\PacMan\PacMan\obj\Debug\PacMan.g.resources
 X:\PacManSX\PacMan\PacMan\obj\Debug\PacMan.dll
 X:\PacManSX\PacMan\PacMan\obj\Debug\PacMan.pdb
 X:\PacManSX\PacMan\PacMan\obj\Debug\XapCacheFile.xml
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\Credits.g.cs

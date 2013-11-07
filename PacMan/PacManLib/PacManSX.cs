@@ -562,6 +562,8 @@ namespace PacManLib
             }
         }
 
+#if WINDOWS_PHONE
+
         /// <summary>
         /// Method fired when we're navigating from the game page.
         /// </summary>
@@ -573,6 +575,8 @@ namespace PacManLib
             if (this.godmodeInstance.State == SoundState.Playing)
                 this.godmodeInstance.Stop();
         }
+
+#endif
 
         #endregion
 
