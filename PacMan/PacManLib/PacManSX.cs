@@ -609,7 +609,7 @@ namespace PacManLib
         /// </summary>
         private void LoadMap(int level)
         {
-            if (level == 1)
+            if (level % 2 == 1)
             {
                 this.tileMap.LoadMap(level, new int[,]
                 {
@@ -645,7 +645,7 @@ namespace PacManLib
                 this.tileMap.UpdateTile(new Point(20, 8), SpawnPoint.PurpleGhost);
                 this.tileMap.UpdateTile(new Point(20, 12), SpawnPoint.Fruit);
             }
-            else if (level == 2)
+            else if (level % 2 == 0)
             {
                 this.tileMap.LoadMap(level, new int[,]
                 {
