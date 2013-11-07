@@ -52,11 +52,11 @@ namespace PacManLib
         public const int GameCountdownInSeconds = 3;
         public const int FirstRoundGameCountdownInSeconds = 6;
 
-        public const int LeaveJailInSeconds = 1;
+        public const int LeaveJailInSeconds = 5;
         public const int GhostRespawnInSeconds = 5;
-        public const int FruitDespawnInSeconds = 30;
+        public const int FruitDespawnInSeconds = 15;
         public const int FruitMinSpawnTimerInSeconds = 0;
-        public const int FruitMaxSpawnTimerInSeconds = 10;
+        public const int FruitMaxSpawnTimerInSeconds = 30;
         public const int GodModeActiveInSeconds = 10;
 
         #endregion
@@ -73,6 +73,8 @@ namespace PacManLib
         private bool accelInitialized = false;
         private float lastX = 0;
         private float lastY = 0;
+#elif WINDOWS
+        private KeyboardState previousKeyboardState;
 #endif
 
         private bool ghostBullet = false;
@@ -126,6 +128,9 @@ namespace PacManLib
         private SoundEffect soundGodMode;
         private SoundEffect soundChomp;
         private SoundEffect soundEatScore;
+        private SoundEffect soundBullet;
+        private SoundEffect soundWoodBarrier;
+        private SoundEffect soundIronBarrier;
 
         #endregion
 
@@ -161,9 +166,12 @@ namespace PacManLib
                 PacManSX.TileWidth, PacManSX.TileHeight);
             this.ghostBulletIconTexture = this.GameManager.ContentManager.Load<Texture2D>("Ghosts/AmmoGhost");
 
-            soundEatScore = gameManager.ContentManager.Load<SoundEffect>("Sounds\\coin");
-            soundChomp = gameManager.ContentManager.Load<SoundEffect>("Sounds\\chomp");
-            soundGodMode = gameManager.ContentManager.Load<SoundEffect>("Sounds\\god_mode");
+            soundEatScore = gameManager.ContentManager.Load<SoundEffect>("Sounds/coin");
+            soundChomp = gameManager.ContentManager.Load<SoundEffect>("Sounds/chomp");
+            soundGodMode = gameManager.ContentManager.Load<SoundEffect>("Sounds/godmode");
+            this.soundBullet = gameManager.ContentManager.Load<SoundEffect>("Sounds/proj");
+            this.soundWoodBarrier = gameManager.ContentManager.Load<SoundEffect>("Sounds/woodbox");
+            this.soundIronBarrier = gameManager.ContentManager.Load<SoundEffect>("Sounds/ironbox");
             
             chompInstance = soundChomp.CreateInstance();
             godmodeInstance = soundGodMode.CreateInstance();
@@ -226,6 +234,8 @@ namespace PacManLib
             TouchPanel.EnabledGestures = GestureType.DoubleTap;
             this.accelerometer = new Accelerometer();
             this.accelerometer.CurrentValueChanged += accelerometer_CurrentValueChanged;
+#elif WINDOWS
+            this.previousKeyboardState = Keyboard.GetState();
 #endif
         }
 
@@ -298,6 +308,9 @@ namespace PacManLib
                         this.fruitSpawnTime = rand.Next(PacManSX.FruitMinSpawnTimerInSeconds, PacManSX.FruitMaxSpawnTimerInSeconds);
                         this.fruitSpawnTimer = 0;
                         this.fruitSpawned = false;
+
+                        if (this.chompInstance.State == SoundState.Stopped)
+                            this.chompInstance.Play();
                     }
                     else
                     {
@@ -375,16 +388,16 @@ namespace PacManLib
                     // Calculate the bounds of the bullet and check if it intersects with a ghost.
                     Rectangle bulletBounds = new Rectangle((int)this.bulletPosition.X, (int)this.bulletPosition.Y, 20, 20);
 
-                    if (this.blueGhost != null && bulletBounds.Intersects(this.blueGhost.Bounds))
+                    if (this.blueGhost != null && this.blueGhost.Alive && bulletBounds.Intersects(this.blueGhost.Bounds))
                         this.bulletAlive = false;
 
-                    if (this.greenGhost != null && bulletBounds.Intersects(this.greenGhost.Bounds))
+                    if (this.greenGhost != null && this.greenGhost.Alive && bulletBounds.Intersects(this.greenGhost.Bounds))
                         this.bulletAlive = false;
 
-                    if (this.yellowGhost != null && bulletBounds.Intersects(this.yellowGhost.Bounds))
+                    if (this.yellowGhost != null && this.yellowGhost.Alive && bulletBounds.Intersects(this.yellowGhost.Bounds))
                         this.bulletAlive = false;
 
-                    if (this.purpleGhost != null && bulletBounds.Intersects(this.purpleGhost.Bounds))
+                    if (this.purpleGhost != null && this.purpleGhost.Alive && bulletBounds.Intersects(this.purpleGhost.Bounds))
                         this.bulletAlive = false;
 
                     // Convert the center of the bullet to the bullet coordinates.
@@ -399,12 +412,14 @@ namespace PacManLib
                         // Destroy the wood barrier if the bullet hits it.
                         this.bulletAlive = false;
                         this.tileMap.UpdateTile(bulletCoords, TileContent.Path);
+                        this.soundWoodBarrier.Play();
                     }
                     else if (bulletTile.TileContent == TileContent.ghostBarrier && this.ghostBullet)
                     {
                         // Destroy the ghost barrier if the bullet hits it and it's a ghost bullet.
                         this.bulletAlive = false;
                         this.tileMap.UpdateTile(bulletCoords, TileContent.Path);
+                        this.soundIronBarrier.Play();
                     }
                 }
             }
@@ -433,11 +448,7 @@ namespace PacManLib
                     {
                         // Reset the lives and score if it's game over.
                         if (this.gameOver)
-                        {
                             this.gameOver = false;
-                            this.lives = 3;
-                            this.score = 0;
-                        }
 
                         this.fruitSpawnTime = rand.Next(PacManSX.FruitMinSpawnTimerInSeconds, PacManSX.FruitMaxSpawnTimerInSeconds);
 
@@ -606,42 +617,41 @@ namespace PacManLib
                 this.tileMap.UpdateTile(new Point(20, 8), SpawnPoint.PurpleGhost);
                 this.tileMap.UpdateTile(new Point(20, 12), SpawnPoint.Fruit);
             }
-            else if (level > 1)
+            else if (level == 2)
             {
                 this.tileMap.LoadMap(level, new int[,]
                 {
-                    { 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 5, 1, 1, 1, 1, 1, 1, 1, 6, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 17, 0, 0, 17, 0, 0, 17, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 0, 5, 8, 18, 7, 6, 0, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2, 0, 2, 17, 17, 17, 2, 0, 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 10, 0, 3, 1, 1, 1, 4, 0, 10, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 13, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
-                    { 2, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 2 },
+                    { 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 13, 13, 13, 13, 13, 13, 13, 13, 13, 15, 2, 2, 15, 13, 13, 13, 13, 13, 13, 13, 13, 13, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 2, 13, 5, 1, 1, 1, 1, 6, 13, 5, 1, 1, 1, 1, 1, 1, 1, 6, 15, 2, 2, 13, 5, 1, 1, 1, 1, 1, 1, 1, 6, 13, 5, 1, 1, 1, 1, 6, 13, 2 },
+                    { 2, 13, 3, 1, 1, 1, 1, 4, 13, 3, 1, 1, 1, 1, 1, 1, 1, 4, 13, 3, 4, 13, 3, 1, 1, 1, 1, 1, 1, 1, 4, 13, 3, 1, 1, 1, 1, 4, 13, 2 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 15, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 15, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 2, 14, 7, 1, 1, 1, 1, 8, 13, 5, 6, 13, 9, 13, 7, 1, 1, 1, 1, 6, 5, 1, 1, 1, 1, 8, 13, 9, 13, 5, 6, 13, 7, 1, 1, 1, 1, 8, 14, 2 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 2, 2, 13, 2, 15, 13, 13, 13, 13, 15, 2, 2, 15, 13, 13, 13, 13, 15, 2, 13, 2, 2, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 3, 1, 1, 1, 1, 1, 1, 6, 13, 2, 2, 13, 3, 1, 1, 1, 1, 8, 0, 3, 4, 0, 7, 1, 1, 1, 1, 4, 13, 2, 2, 13, 5, 1, 1, 1, 1, 1, 1, 4 },
+                    { 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 15, 13, 13, 13, 13, 13, 15, 17, 0, 17, 17, 0, 15, 13, 13, 13, 13, 15, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0 },
+                    { 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 13, 5, 1, 1, 1, 6, 13, 5, 8, 18, 7, 6, 13, 5, 1, 1, 6, 13, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0 },
+                    { 7, 1, 1, 1, 1, 1, 1, 4, 13, 3, 4, 13, 2, 0, 0, 0, 2, 13, 2, 17, 17, 17, 2, 13, 2, 0, 0, 2, 13, 3, 4, 13, 3, 1, 1, 1, 1, 1, 1, 8 },
+                    { 0, 0, 0, 0, 0, 0, 0, 0, 15, 13, 13, 15, 3, 1, 1, 1, 4, 13, 3, 1, 1, 1, 4, 13, 3, 1, 1, 4, 15, 13, 13, 15, 0, 0, 0, 0, 0, 0, 0, 0 },
+                    { 7, 1, 1, 1, 1, 1, 1, 6, 13, 5, 6, 15, 0, 0, 0, 0, 0, 17, 12, 17, 0, 17, 12, 17, 0, 0, 0, 0, 15, 5, 6, 13, 5, 1, 1, 1, 1, 1, 1, 8 },
+                    { 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 13, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 13, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0 },
+                    { 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 13, 2, 2, 13, 2, 0, 0, 0, 0, 0, 0, 0 },
+                    { 5, 1, 1, 1, 1, 1, 1, 4, 13, 3, 4, 13, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 13, 3, 4, 13, 3, 1, 1, 1, 1, 1, 1, 6 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 17, 0, 0, 17, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 2, 13, 5, 1, 1, 1, 1, 6, 13, 5, 6, 13, 5, 1, 1, 1, 1, 6, 13, 5, 6, 13, 5, 1, 1, 1, 1, 6, 13, 5, 6, 13, 5, 1, 1, 1, 1, 6, 13, 2 },
+                    { 2, 14, 3, 1, 1, 1, 1, 4, 13, 2, 2, 13, 3, 1, 1, 1, 1, 4, 13, 3, 4, 13, 3, 1, 1, 1, 1, 4, 13, 2, 2, 13, 3, 1, 1, 1, 1, 4, 14, 2 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 15, 2, 2, 15, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 15, 2, 2, 15, 13, 13, 13, 13, 13, 13, 15, 2 },
+                    { 2, 13, 7, 1, 1, 1, 1, 1, 1, 4, 3, 1, 1, 1, 1, 1, 1, 8, 13, 7, 8, 13, 7, 1, 1, 1, 1, 1, 1, 4, 3, 1, 1, 1, 1, 1, 1, 8, 13, 2 },
+                    { 2, 15, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 15, 13, 13, 15, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 15, 2 },
                     { 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4 },
                 });
 
-                // Jail leave: Green > Yellow > Blue
-                this.tileMap.UpdateTile(new Point(24, 3), SpawnPoint.Player);
-                this.tileMap.UpdateTile(new Point(16, 9), SpawnPoint.BlueGhost);
-                this.tileMap.UpdateTile(new Point(17, 9), SpawnPoint.GreenGhost);
-                this.tileMap.UpdateTile(new Point(18, 9), SpawnPoint.YellowGhost);
-                this.tileMap.UpdateTile(new Point(17, 7), SpawnPoint.PurpleGhost);
-                this.tileMap.UpdateTile(new Point(-1, -1), SpawnPoint.Fruit);
+                this.tileMap.UpdateTile(new Point(20, 16), SpawnPoint.Player);
+                this.tileMap.UpdateTile(new Point(19, 10), SpawnPoint.BlueGhost);
+                this.tileMap.UpdateTile(new Point(20, 10), SpawnPoint.GreenGhost);
+                this.tileMap.UpdateTile(new Point(21, 10), SpawnPoint.YellowGhost);
+                this.tileMap.UpdateTile(new Point(20, 8), SpawnPoint.PurpleGhost);
+                this.tileMap.UpdateTile(new Point(20, 12), SpawnPoint.Fruit);
             }
 
             this.dotsAndRingsLeft = this.tileMap.DotsAndRings();
@@ -654,7 +664,15 @@ namespace PacManLib
         {
             // If it's game over, reload the map.
             if (this.gameOver)
+            {
                 this.LoadMap(1);
+                this.ghostBullets = 0;
+                this.lives = 3;
+                this.score = 0;
+                this.gameCountdown = PacManSX.FirstRoundGameCountdownInSeconds;
+            }
+            else
+                this.gameCountdown = PacManSX.GameCountdownInSeconds;
 
             int i = 0;
             Point[] spawnCoords = this.tileMap.GetSpawns(SpawnPoint.Player, SpawnPoint.BlueGhost, SpawnPoint.GreenGhost, SpawnPoint.YellowGhost, SpawnPoint.PurpleGhost);
@@ -709,7 +727,6 @@ namespace PacManLib
                 this.godmodeInstance.Stop();
 
             // Start the game countdown.
-            this.gameCountdown = PacManSX.GameCountdownInSeconds;
             this.gameStarted = false;
             this.leaveJailTimer = 0;
             this.leaveJail = false;
@@ -1931,11 +1948,12 @@ namespace PacManLib
             else if (keyboardState.IsKeyDown(Keys.D))
                 direction = Direction.Right;
 
-            if (keyboardState.IsKeyDown(Keys.Space))
+            if (keyboardState.IsKeyDown(Keys.Space) && this.previousKeyboardState.IsKeyUp(Keys.Space))
                 Fire();
-            else if (keyboardState.IsKeyDown(Keys.LeftControl))
+            else if (keyboardState.IsKeyDown(Keys.LeftControl) && this.previousKeyboardState.IsKeyUp(Keys.LeftControl))
                 TwoFingerFire();
 
+            this.previousKeyboardState = keyboardState;
 #elif WINDOWS_PHONE
             // If we're using Windows Phone use the Tap gesture to fire and the accelerometer to move.
 
@@ -2101,7 +2119,7 @@ namespace PacManLib
         private void Fire()
         {
             // Only one bullet can be alive and you need atleast BulletCost in score..
-            if (!this.bulletAlive && this.score >= PacManSX.StartBulletCost)
+            if (!this.bulletAlive && this.score >= PacManSX.StartBulletCost * this.bulletsFired)
             {
                 this.bulletMotion = this.player.Motion;
 
@@ -2119,6 +2137,8 @@ namespace PacManLib
                 this.ghostBullet = false;
                 this.bulletsFired++;
                 this.score -= this.bulletsFired * PacManSX.StartBulletCost;
+
+                this.soundBullet.Play();
             }
         }
 
@@ -2146,6 +2166,8 @@ namespace PacManLib
                 this.ghostBullet = true;
                 this.ghostBullets--;
                 this.score -= PacManSX.GhostScore;
+
+                this.soundBullet.Play();
             }
         }
 
@@ -2244,24 +2266,36 @@ namespace PacManLib
                     this.blueGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
                     this.ghostBullets++;
+
+                    if (chompInstance.State == SoundState.Stopped)
+                        chompInstance.Play();
                 }
                 else if (this.greenGhost != null && this.greenGhost.Alive && this.greenGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.greenGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
                     this.ghostBullets++;
+
+                    if (chompInstance.State == SoundState.Stopped)
+                        chompInstance.Play();
                 }
                 else if (this.yellowGhost != null && this.yellowGhost.Alive && this.yellowGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.yellowGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
                     this.ghostBullets++;
+
+                    if (chompInstance.State == SoundState.Stopped)
+                        chompInstance.Play();
                 }
                 else if (this.purpleGhost != null && this.purpleGhost.Alive && this.purpleGhost.Bounds.Intersects(this.player.Bounds))
                 {
                     this.purpleGhost.Alive = false;
                     this.score += PacManSX.GhostScore * scoreMultiplier;
                     this.ghostBullets++;
+
+                    if (chompInstance.State == SoundState.Stopped)
+                        chompInstance.Play();
                 }
             }
             else
@@ -2275,7 +2309,8 @@ namespace PacManLib
                     this.lives--;
                     this.player.Alive = false;
 
-                    chompInstance.Play();
+                    if (chompInstance.State == SoundState.Stopped)
+                        chompInstance.Play();
 
                     // Set game over to true if the player doesn't have any lives left.
                     if (this.lives == 0)

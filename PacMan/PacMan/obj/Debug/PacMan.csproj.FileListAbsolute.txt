@@ -49,7 +49,6 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Ghosts\Am
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Font.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\chomp.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\coin.xnb
-D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\god_mode.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\ApplicationIcon.png
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Background.png
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\PacMan.dll
@@ -69,3 +68,7 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\XapCacheFile.xml
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Ghosts\GodMode.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\Rules.g.cs
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\GhostBullet.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\godmode.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\ironbox.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\proj.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\woodbox.xnb

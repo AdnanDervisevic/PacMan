@@ -134,7 +134,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\chomp.xnb</Output>
-      <Time>2013-10-28T15:23:38.8849286+01:00</Time>
+      <Time>2013-11-07T11:56:02.5048637+01:00</Time>
     </Item>
     <Item>
       <Source>Sounds\coin.wav</Source>
@@ -143,16 +143,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\coin.xnb</Output>
-      <Time>2013-10-28T15:23:38.8869285+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sounds\god_mode.wav</Source>
-      <Name>Sounds\god_mode</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\god_mode.xnb</Output>
-      <Time>2013-10-28T15:23:38.9029306+01:00</Time>
+      <Time>2013-11-07T11:56:02.5118642+01:00</Time>
     </Item>
     <Item>
       <Source>GhostBullet.png</Source>
@@ -162,6 +153,42 @@
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\GhostBullet.xnb</Output>
       <Time>2013-11-06T21:57:15+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\godmode.wav</Source>
+      <Name>Sounds\godmode</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\godmode.xnb</Output>
+      <Time>2013-11-07T11:56:02.6020611+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\ironbox.wav</Source>
+      <Name>Sounds\ironbox</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\ironbox.xnb</Output>
+      <Time>2013-11-07T11:56:02.6060346+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\proj.wav</Source>
+      <Name>Sounds\proj</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\proj.xnb</Output>
+      <Time>2013-11-07T11:56:02.609035+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\woodbox.wav</Source>
+      <Name>Sounds\woodbox</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\woodbox.xnb</Output>
+      <Time>2013-11-07T11:56:02.6120342+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

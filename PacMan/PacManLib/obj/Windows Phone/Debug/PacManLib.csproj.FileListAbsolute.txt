@@ -39,7 +39,6 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Font.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\chomp.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\coin.xnb
-D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\god_mode.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\PacManLib.dll
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\PacManLib.pdb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
@@ -48,3 +47,7 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GodMode.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.csprojResolveAssemblyReference.cache
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\GhostBullet.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\godmode.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\ironbox.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\proj.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\woodbox.xnb

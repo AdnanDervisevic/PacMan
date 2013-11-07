@@ -1,9 +1,9 @@
-﻿<xapCache source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\PacMan.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="2013-11-06 21:59:10">
+﻿<xapCache source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\PacMan.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="2013-11-07 12:31:22">
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="2013-10-21 12:23:28" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Background.png" archivePath="Background.png" lastWriteTime="2013-11-05 21:46:07" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="2013-11-05 21:45:47" />
-  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\PacMan.dll" archivePath="PacMan.dll" lastWriteTime="2013-11-06 21:59:10" />
-  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\PacManLib.dll" archivePath="PacManLib.dll" lastWriteTime="2013-11-06 21:59:09" />
+  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\obj\Debug\PacMan.dll" archivePath="PacMan.dll" lastWriteTime="2013-11-07 12:31:19" />
+  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\PacManLib.dll" archivePath="PacManLib.dll" lastWriteTime="2013-11-07 12:31:17" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\bg.png" archivePath="bg.png" lastWriteTime="2013-11-04 16:02:10" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\SplashScreenImage.jpg" archivePath="SplashScreenImage.jpg" lastWriteTime="2013-11-04 17:09:37" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="2013-11-05 21:57:57" />
@@ -21,10 +21,13 @@
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Ghosts\AmmoGhost.xnb" archivePath="Content\Ghosts\AmmoGhost.xnb" lastWriteTime="2013-11-05 21:57:55" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Ghosts\GodMode.xnb" archivePath="Content\Ghosts\GodMode.xnb" lastWriteTime="2013-11-05 21:57:55" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Font.xnb" archivePath="Content\Font.xnb" lastWriteTime="2013-11-05 21:57:56" />
-  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\chomp.xnb" archivePath="Content\Sounds\chomp.xnb" lastWriteTime="2013-11-05 21:57:56" />
-  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\coin.xnb" archivePath="Content\Sounds\coin.xnb" lastWriteTime="2013-11-05 21:57:56" />
-  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\god_mode.xnb" archivePath="Content\Sounds\god_mode.xnb" lastWriteTime="2013-11-05 21:57:56" />
+  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\chomp.xnb" archivePath="Content\Sounds\chomp.xnb" lastWriteTime="2013-11-07 12:31:17" />
+  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\coin.xnb" archivePath="Content\Sounds\coin.xnb" lastWriteTime="2013-11-07 12:31:17" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\GhostBullet.xnb" archivePath="Content\GhostBullet.xnb" lastWriteTime="2013-11-06 21:59:09" />
+  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\godmode.xnb" archivePath="Content\Sounds\godmode.xnb" lastWriteTime="2013-11-07 12:31:17" />
+  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\ironbox.xnb" archivePath="Content\Sounds\ironbox.xnb" lastWriteTime="2013-11-07 12:31:17" />
+  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\proj.xnb" archivePath="Content\Sounds\proj.xnb" lastWriteTime="2013-11-07 12:31:17" />
+  <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\woodbox.xnb" archivePath="Content\Sounds\woodbox.xnb" lastWriteTime="2013-11-07 12:31:17" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="2013-11-05 21:45:47" />
   <file source="D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Background.png" archivePath="Background.png" lastWriteTime="2013-11-05 21:46:07" />
 </xapCache>
