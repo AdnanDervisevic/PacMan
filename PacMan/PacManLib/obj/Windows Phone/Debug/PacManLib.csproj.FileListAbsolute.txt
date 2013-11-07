@@ -50,3 +50,5 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\ironbox.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\proj.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\woodbox.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\background.xnb
+D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.csprojResolveAssemblyReference.cache

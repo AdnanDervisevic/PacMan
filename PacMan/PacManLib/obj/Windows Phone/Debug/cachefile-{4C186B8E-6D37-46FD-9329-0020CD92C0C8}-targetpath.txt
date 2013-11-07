@@ -19,3 +19,4 @@ Content\Sounds\godmode.xnb
 Content\Sounds\ironbox.xnb
 Content\Sounds\proj.xnb
 Content\Sounds\woodbox.xnb
+Content\Sounds\background.xnb

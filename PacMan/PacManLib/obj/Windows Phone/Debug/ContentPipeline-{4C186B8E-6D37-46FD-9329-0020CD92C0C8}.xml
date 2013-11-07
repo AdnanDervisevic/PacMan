@@ -152,7 +152,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\coin.xnb</Output>
-      <Time>2013-11-07T11:56:02.5118642+01:00</Time>
+      <Time>2013-11-07T16:45:15.8670245+01:00</Time>
     </Item>
     <Item>
       <Source>Sounds\godmode.wav</Source>
@@ -189,6 +189,15 @@
       <Options>None</Options>
       <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\woodbox.xnb</Output>
       <Time>2013-11-07T11:56:02.6120342+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\background.mp3</Source>
+      <Name>Sounds\background</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\background.xnb</Output>
+      <Time>2013-11-07T16:33:30.7788673+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -125,12 +125,14 @@ namespace PacManLib
 
         private SoundEffectInstance godmodeInstance;
         private SoundEffectInstance chompInstance;
+        private SoundEffectInstance backgroundSoundInstance;
         private SoundEffect soundGodMode;
         private SoundEffect soundChomp;
         private SoundEffect soundEatScore;
         private SoundEffect soundBullet;
         private SoundEffect soundWoodBarrier;
         private SoundEffect soundIronBarrier;
+        private SoundEffect backgroundSound;
 
         #endregion
 
@@ -166,17 +168,23 @@ namespace PacManLib
                 PacManSX.TileWidth, PacManSX.TileHeight);
             this.ghostBulletIconTexture = this.GameManager.ContentManager.Load<Texture2D>("Ghosts/AmmoGhost");
 
-            soundEatScore = gameManager.ContentManager.Load<SoundEffect>("Sounds/coin");
+            this.soundEatScore = gameManager.ContentManager.Load<SoundEffect>("Sounds/coin");
             soundChomp = gameManager.ContentManager.Load<SoundEffect>("Sounds/chomp");
             soundGodMode = gameManager.ContentManager.Load<SoundEffect>("Sounds/godmode");
             this.soundBullet = gameManager.ContentManager.Load<SoundEffect>("Sounds/proj");
             this.soundWoodBarrier = gameManager.ContentManager.Load<SoundEffect>("Sounds/woodbox");
             this.soundIronBarrier = gameManager.ContentManager.Load<SoundEffect>("Sounds/ironbox");
-            
+            this.backgroundSound = gameManager.ContentManager.Load<SoundEffect>("Sounds/background");
+
             chompInstance = soundChomp.CreateInstance();
             godmodeInstance = soundGodMode.CreateInstance();
-            godmodeInstance.Volume = 0.75f;
+            godmodeInstance.Volume = 0.5f;
             godmodeInstance.IsLooped = true;
+
+            backgroundSoundInstance = backgroundSound.CreateInstance();
+            backgroundSoundInstance.Volume = 0.1f;
+            backgroundSoundInstance.IsLooped = true;
+            backgroundSoundInstance.Play();
 
             // Create the tile map and load the first map.
             this.tileMap = new TileMap(gameManager);
@@ -270,6 +278,7 @@ namespace PacManLib
                         this.player.GodMode = false;
                         this.godModeTimer = 0;
                         godmodeInstance.Stop();
+                        backgroundSoundInstance.Play();
                     }
                 }
 
@@ -750,6 +759,9 @@ namespace PacManLib
             // Turn on godMode.
             player.GodMode = true;
             this.godModeTimer = 0;
+
+            if (backgroundSoundInstance.State == SoundState.Playing)
+                backgroundSoundInstance.Stop();
 
             //Play godmode music if not active
             if (godmodeInstance.State == SoundState.Stopped)
