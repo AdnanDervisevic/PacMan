@@ -46,6 +46,12 @@ namespace PacMan
             NavigationService.Navigate(new Uri("/Rules.xaml", UriKind.Relative));
         }
 
+        private void creditsClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Credits.xaml", UriKind.Relative));
+
+        }
+
         #endregion
     }
 }

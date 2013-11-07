@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>BlackTexture.png</Source>
+      <Name>BlackTexture</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\BlackTexture.xnb</Output>
+      <Time>2013-11-05T21:39:27.9751061+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Bullet.png</Source>
+      <Name>Bullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Bullet.xnb</Output>
+      <Time>2013-11-05T21:39:27.9751061+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Life.png</Source>
+      <Name>Life</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Life.xnb</Output>
+      <Time>2013-11-05T21:39:27.9781061+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Pacman.png</Source>
+      <Name>Pacman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Pacman.xnb</Output>
+      <Time>2013-11-05T21:39:27.9791084+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\BlueGhost.png</Source>
+      <Name>Ghosts\BlueGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Ghosts\BlueGhost.xnb</Output>
+      <Time>2013-11-05T21:39:27.9771062+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\GreenGhost.png</Source>
+      <Name>Ghosts\GreenGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Ghosts\GreenGhost.xnb</Output>
+      <Time>2013-11-05T21:39:27.9771062+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\PurpleGhost.png</Source>
+      <Name>Ghosts\PurpleGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Ghosts\PurpleGhost.xnb</Output>
+      <Time>2013-11-05T21:39:27.9771062+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\YellowGhost.png</Source>
+      <Name>Ghosts\YellowGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Ghosts\YellowGhost.xnb</Output>
+      <Time>2013-11-05T22:00:37.998237+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Tiles\Door.png</Source>
+      <Name>Tiles\Door</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Tiles\Door.xnb</Output>
+      <Time>2013-11-05T21:39:27.9951064+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Tiles\Fruits.png</Source>
+      <Name>Tiles\Fruits</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Tiles\Fruits.xnb</Output>
+      <Time>2013-11-05T21:39:27.9961066+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Tiles\Tileset.png</Source>
+      <Name>Tiles\Tileset</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Tiles\Tileset.xnb</Output>
+      <Time>2013-11-05T21:39:27.9961066+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\AmmoGhost.png</Source>
+      <Name>Ghosts\AmmoGhost</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Ghosts\AmmoGhost.xnb</Output>
+      <Time>2013-11-05T22:00:37.998237+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Ghosts\GodMode.png</Source>
+      <Name>Ghosts\GodMode</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Ghosts\GodMode.xnb</Output>
+      <Time>2013-11-05T21:39:27.9771062+01:00</Time>
+    </Item>
+    <Item>
+      <Source>GhostBullet.png</Source>
+      <Name>GhostBullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\GhostBullet.xnb</Output>
+      <Time>2013-11-07T12:09:50.5156724+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Font.spritefont</Source>
+      <Name>Font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Font.xnb</Output>
+      <Time>2013-11-05T21:39:27.9751061+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\chomp.wav</Source>
+      <Name>Sounds\chomp</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Sounds\chomp.xnb</Output>
+      <Time>2013-11-05T21:39:27.9801065+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\coin.wav</Source>
+      <Name>Sounds\coin</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Sounds\coin.xnb</Output>
+      <Time>2013-11-07T18:38:55.3918792+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\godmode.wav</Source>
+      <Name>Sounds\godmode</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Sounds\godmode.xnb</Output>
+      <Time>2013-11-07T16:49:01.93845+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\ironbox.wav</Source>
+      <Name>Sounds\ironbox</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Sounds\ironbox.xnb</Output>
+      <Time>2013-11-07T16:49:01.9424498+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\proj.wav</Source>
+      <Name>Sounds\proj</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Sounds\proj.xnb</Output>
+      <Time>2013-11-07T16:49:01.9514501+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\woodbox.wav</Source>
+      <Name>Sounds\woodbox</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Sounds\woodbox.xnb</Output>
+      <Time>2013-11-07T16:49:01.9524503+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\background.mp3</Source>
+      <Name>Sounds\background</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\Sounds\background.xnb</Output>
+      <Time>2013-11-07T18:38:55.3908793+01:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{4C186B8E-6D37-46FD-9329-0020CD92C0C8}</ContentProjectGUID>
+      <TargetPlatform>WindowsPhone</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Release</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>X:\PacManSX\PacMan\PacManLibContent\</RootDirectory>
+      <LoggerRootDirectory>X:\PacManSX\PacMan\PacManLib\</LoggerRootDirectory>
+      <IntermediateDirectory>X:\PacManSX\PacMan\PacManLib\obj\Windows Phone\Release\</IntermediateDirectory>
+      <OutputDirectory>X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Release\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2012-09-06T15:52:54+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2013-10-29T18:14:23.209098+01:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
