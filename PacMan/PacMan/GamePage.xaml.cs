@@ -75,6 +75,8 @@ namespace PacMan
         /// <param name="e"></param>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            this.pacMan.StopSounds();
+
             // Stop the timer
             timer.Stop();
 
@@ -87,6 +89,19 @@ namespace PacMan
         #endregion
 
         #region Private Helpers
+
+        /// <summary>
+        /// Sets the orientation.
+        /// </summary>
+        protected override void OnOrientationChanged(OrientationChangedEventArgs e)
+        {
+            if (e.Orientation == PageOrientation.LandscapeLeft)
+                this.pacMan.GameManager.Orientation = DisplayOrientation.LandscapeLeft;
+            else if (e.Orientation == PageOrientation.LandscapeRight)
+                this.pacMan.GameManager.Orientation = DisplayOrientation.LandscapeRight;
+
+            base.OnOrientationChanged(e);
+        }
 
         /// <summary>
         /// Allows the page to run logic such as updating the world,
