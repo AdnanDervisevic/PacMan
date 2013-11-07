@@ -73,3 +73,43 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\ir
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\proj.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\woodbox.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacMan\Bin\Debug\Content\Sounds\background.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\ApplicationIcon.png
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Background.png
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\BlackTexture.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Bullet.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Life.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Pacman.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Ghosts\BlueGhost.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Ghosts\GreenGhost.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Ghosts\PurpleGhost.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Ghosts\YellowGhost.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Tiles\Door.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Tiles\Fruits.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Tiles\Tileset.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Ghosts\AmmoGhost.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Ghosts\GodMode.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\GhostBullet.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Font.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Sounds\chomp.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Sounds\coin.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Sounds\godmode.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Sounds\ironbox.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Sounds\proj.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Sounds\woodbox.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\Content\Sounds\background.xnb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\PacMan.dll
+X:\PacManSX\PacMan\PacMan\Bin\Debug\PacMan.pdb
+X:\PacManSX\PacMan\PacMan\Bin\Debug\AppManifest.xaml
+X:\PacManSX\PacMan\PacMan\Bin\Debug\PacMan.xap
+X:\PacManSX\PacMan\PacMan\Bin\Debug\PacManLib.dll
+X:\PacManSX\PacMan\PacMan\Bin\Debug\PacManLib.pdb
+X:\PacManSX\PacMan\PacMan\obj\Debug\PacMan.csprojResolveAssemblyReference.cache
+X:\PacManSX\PacMan\PacMan\obj\Debug\App.g.cs
+X:\PacManSX\PacMan\PacMan\obj\Debug\Credits.g.cs
+X:\PacManSX\PacMan\PacMan\obj\Debug\GamePage.g.cs
+X:\PacManSX\PacMan\PacMan\obj\Debug\MainPage.g.cs
+X:\PacManSX\PacMan\PacMan\obj\Debug\Rules.g.cs
+X:\PacManSX\PacMan\PacMan\obj\Debug\PacMan.g.resources
+X:\PacManSX\PacMan\PacMan\obj\Debug\PacMan.dll
+X:\PacManSX\PacMan\PacMan\obj\Debug\PacMan.pdb
+X:\PacManSX\PacMan\PacMan\obj\Debug\XapCacheFile.xml

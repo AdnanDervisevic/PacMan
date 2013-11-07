@@ -52,3 +52,31 @@ D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\woodbox.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\background.xnb
 D:\Dropbox\HV\Årskurs 3\PUM400\PacMan\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.csprojResolveAssemblyReference.cache
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\BlackTexture.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Bullet.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Life.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Pacman.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\BlueGhost.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GreenGhost.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\PurpleGhost.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\YellowGhost.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Tiles\Door.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Tiles\Fruits.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Tiles\Tileset.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\AmmoGhost.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Ghosts\GodMode.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\GhostBullet.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Font.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\chomp.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\coin.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\godmode.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\ironbox.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\proj.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\woodbox.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\Content\Sounds\background.xnb
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\PacManLib.dll
+X:\PacManSX\PacMan\PacManLib\bin\Windows Phone\Debug\PacManLib.pdb
+X:\PacManSX\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.csprojResolveAssemblyReference.cache
+X:\PacManSX\PacMan\PacManLib\obj\Windows Phone\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+X:\PacManSX\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.dll
+X:\PacManSX\PacMan\PacManLib\obj\Windows Phone\Debug\PacManLib.pdb

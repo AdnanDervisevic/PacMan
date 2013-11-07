@@ -29,7 +29,7 @@ namespace PacManLib
     {
         #region Consts
 #if WINDOWS_PHONE
-        public const float AccelerometerDifference = 0.17f;
+        public const float AccelerometerDifference = 0.10f;
 #endif
 
         public const int TitleHeight = 20;
@@ -2022,7 +2022,7 @@ namespace PacManLib
 
                     if (Math.Abs(deltaX) > Math.Abs(deltaY))
                     {
-                        if (this.GameManager.Orientation == DisplayOrientation.LandscapeRight)
+                        if (this.GameManager.Orientation == DisplayOrientation.LandscapeLeft)
                         {
                             if (x > this.accelCalibration.X + PacManSX.AccelerometerDifference)
                                 direction = Direction.Up;
@@ -2039,7 +2039,7 @@ namespace PacManLib
                     }
                     else
                     {
-                        if (this.GameManager.Orientation == DisplayOrientation.LandscapeRight)
+                        if (this.GameManager.Orientation == DisplayOrientation.LandscapeLeft)
                         {
                             // Otherwise we're going Right or left.
                             if (y > this.accelCalibration.Y + PacManSX.AccelerometerDifference)
