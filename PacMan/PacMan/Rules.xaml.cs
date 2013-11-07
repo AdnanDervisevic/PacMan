@@ -10,9 +10,9 @@ using Microsoft.Phone.Shell;
 
 namespace PacMan
 {
-    public partial class Page1 : PhoneApplicationPage
+    public partial class Rules : PhoneApplicationPage
     {
-        public Page1()
+        public Rules()
         {
             InitializeComponent();
         }

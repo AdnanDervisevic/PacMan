@@ -33,6 +33,7 @@
             <!--Create a single button to navigate to the second page which is rendered with the XNA Framework-->
             <Button Height="100" Content="Start the game" Click="startGameButtonClick" Margin="0,452,0,203" />
             <Button Height="100" Content="Rules of Pac-Man SX" Click="rulesButtonClick" Margin="0,572,0,83" />
+            <Button Content="Credits" Click="creditsClick" Margin="213,672,-11,5" Foreground="White" BorderBrush="{x:Null}" />
         </Grid>
     </Grid>
  
